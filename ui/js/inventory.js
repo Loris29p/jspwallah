@@ -1277,25 +1277,22 @@ $(document).on("mousedown", ".item-slot", function(e) {
         const itemCount = $(this).data("count");
         const isInSafe = $(this).closest("#inventory-safe").length > 0;
 
-        if (itemName && itemCount > 1) {
-            // Simulate taking all items by triggering MoveItem with count
-            for (let i = 0; i < itemCount; i++) {
-                setTimeout(() => {
-                    // Set the correct hover data for MoveItem
-                    if (isInSafe) {
-                        hoveredItem = {
-                            name: itemName,
-                            invType: 'inventory-safe'
-                        };
-                    } else {
-                        hoveredItem = {
-                            name: itemName,
-                            invType: 'inventory'
-                        };
-                    }
-                    MoveItem(itemName);
-                }, i * 50); // Small delay between each item transfer
+        if (itemName && itemCount >= 1) {
+            // Set the correct hover data for MoveAllItems
+            if (isInSafe) {
+                hoveredItem = {
+                    name: itemName,
+                    invType: 'inventory-safe'
+                };
+            } else {
+                hoveredItem = {
+                    name: itemName,
+                    invType: 'inventory'
+                };
             }
+
+            // Use MoveAllItems to transfer everything at once
+            MoveAllItems(itemName);
         }
         return false;
     }
