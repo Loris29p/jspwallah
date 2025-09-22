@@ -65,7 +65,10 @@ end
 
 _RegisterServerEvent("PLACE_HOLDERPREFIX:d:UseEffect", function(tblData)
     local ply = GetPlayerId(source)
-    if ply.role ~= "vip" and ply.role ~= "vip+" and ply.role ~= "mvp" and ply.role ~= "boss" or ply.GetData()["kill_effect"] and ply.GetData()["kill_effect"].access then
+    local hasKillEffect = ply.GetData()["kill_effect"] and ply.GetData()["kill_effect"].access
+    local hasVipRole = ply.role == "vip" or ply.role == "vip+" or ply.role == "mvp" or ply.role == "boss"
+
+    if not hasVipRole and not hasKillEffect then
         return _TriggerClientEvent("ShowAboveRadarMessage", source, "~r~You need to be a VIP, VIP+ or MVP or BOSS to use this command")
     end
 

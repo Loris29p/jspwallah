@@ -124,7 +124,7 @@ function UseItem(itemName)
     if itemName == "ped_access" or itemName == "ped_access1week" or itemName == "ped_access1month" then
         Tse("guildpvpustom:PedAccess", itemName)
     elseif itemName == "kill_effect" or itemName == "kill_effect1week" or itemName == "kill_effect1month" then
-        Tse("PREFIX_PLACEHOLDER:custom:KillEffect", itemName)
+        Tse("guildpvpustom:KillEffect", itemName)
     elseif itemName == "kevlar" or itemName == "bandage" then
         _TriggerEvent("cl_heal:custom:UseItem", itemName)
     elseif itemName == "tracker_deluxo" then

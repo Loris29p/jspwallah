@@ -25,9 +25,10 @@ end)
 
 
 RegisterCommand("fw", function()
-    if (GM.Player.Role == "vip" or GM.Player.Role == "vip+" or GM.Player.Role == "mvp" or GM.Player.Role == "boss") or GM.Player.Data.kill_effect then
+    local hasKillEffect = GM.Player.Data.kill_effect and GM.Player.Data.kill_effect.access
+    if (GM.Player.Role == "vip" or GM.Player.Role == "vip+" or GM.Player.Role == "mvp" or GM.Player.Role == "boss") or hasKillEffect then
         Tse("PLACE_HOLDERPREFIX:d:UseEffect", {dictName = "scr_indep_fireworks", particleName = "scr_indep_firework_fountain"})
-    else 
+    else
         return ShowAboveRadarMessage("~r~You need to be a VIP, VIP+ or MVP or BOSS to use this command")
     end
 end)
@@ -111,7 +112,8 @@ end
 
 RegisterCommand("killeffect", function()
     print(json.encode(GM.Player.Data))
-    if (GM.Player.Role == "vip" or GM.Player.Role == "vip+" or GM.Player.Role == "mvp" or GM.Player.Role == "boss") or GM.Player.Data.kill_effect.access then
+    local hasKillEffect = GM.Player.Data.kill_effect and GM.Player.Data.kill_effect.access
+    if (GM.Player.Role == "vip" or GM.Player.Role == "vip+" or GM.Player.Role == "mvp" or GM.Player.Role == "boss") or hasKillEffect then
         OpenMenuEffect()
     else
         return ShowAboveRadarMessage("~r~You need to be a VIP, VIP+ or MVP or BOSS to use this command")
