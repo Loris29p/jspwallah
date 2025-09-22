@@ -59,7 +59,7 @@ RegisterNUICallback('editCrewInfo', function(data, cb)
 end)
 
 RegisterNUICallback('leaveCrew', function(data, cb)
-    local isLeave =  CallbackServer("callback:crew:LeaveCrew")
+    local isLeave = TriggerCallback("callback:crew:LeaveCrew")
     if isLeave then
         cb({
             success = true,

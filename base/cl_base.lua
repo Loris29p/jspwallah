@@ -7,6 +7,11 @@ RegisterNetEvent('updateListPlayersServerGlobal', function(list)
     ListPlayersServerGlobal = list
 end)
 
+-- Alias for TriggerCallback to maintain backward compatibility
+function CallbackServer(name, ...)
+    return TriggerCallback(name, ...)
+end
+
 CreateThread(function()
     SetMaxWantedLevel(0)
     ClearPlayerWantedLevel(PlayerId())

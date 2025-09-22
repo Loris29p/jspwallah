@@ -123,9 +123,9 @@ end)
 function SetLeaderboardCrew()
     local leaderboard = {}
     local podium = {}
-    
+
     print("Requesting crew leaderboard data...")
-    local resultCallback = CallbackServer("callback:crew:getLeaderboard")
+    local resultCallback = TriggerCallback("callback:crew:getLeaderboard")
     print("Received crew data:", json.encode(resultCallback))
     
     -- Vérifier si resultCallback est valide
