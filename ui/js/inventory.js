@@ -1263,12 +1263,72 @@ function showContextMenu(e, itemName, itemCount, itemLabel) {
     setTimeout(closeContextMenu, 15000);
 }
 
+// Track double right click
+let lastRightClickTime = 0;
+let lastRightClickTarget = null;
+
+// Add middle mouse button (wheel click) handler for taking all items
+$(document).on("mousedown", ".item-slot", function(e) {
+    // Middle mouse button (wheel click) with Shift = take all items
+    if (e.which === 2 && e.shiftKey) {
+        e.preventDefault();
+
+        const itemName = $(this).data("item");
+        const itemCount = $(this).data("count");
+        const isInSafe = $(this).closest("#inventory-safe").length > 0;
+
+        if (itemName && itemCount > 1) {
+            // Simulate taking all items by triggering MoveItem with count
+            for (let i = 0; i < itemCount; i++) {
+                setTimeout(() => {
+                    // Set the correct hover data for MoveItem
+                    if (isInSafe) {
+                        hoveredItem = {
+                            name: itemName,
+                            invType: 'inventory-safe'
+                        };
+                    } else {
+                        hoveredItem = {
+                            name: itemName,
+                            invType: 'inventory'
+                        };
+                    }
+                    MoveItem(itemName);
+                }, i * 50); // Small delay between each item transfer
+            }
+        }
+        return false;
+    }
+});
+
 // Add context menu event handlers
 $(document).on("contextmenu", ".item-slot", function (e) {
     // Only handle right-click on inventory items (not safe inventory)
     if ($(this).closest("#inventory").length === 0) {
         return;
     }
+
+    // Double right click detection (delete item)
+    const currentTime = Date.now();
+    const timeDiff = currentTime - lastRightClickTime;
+    const isSameTarget = lastRightClickTarget === this;
+
+    if (timeDiff < 500 && isSameTarget) { // 500ms for double click
+        e.preventDefault();
+        const itemName = $(this).data("item");
+        if (itemName) {
+            // Double right click = delete item
+            $.post("https://gamemode/deleteItem", JSON.stringify({
+                item: itemName,
+            }));
+        }
+        lastRightClickTime = 0;
+        lastRightClickTarget = null;
+        return;
+    }
+
+    lastRightClickTime = currentTime;
+    lastRightClickTarget = this;
 
     if (!e.ctrlKey) {
         e.preventDefault();
@@ -1282,7 +1342,7 @@ $(document).on("contextmenu", ".item-slot", function (e) {
             showContextMenu(e, itemName, itemCount, itemLabel);
         }
     } else {
-        // Ctrl + Right click to delete item
+        // Ctrl + Right click to delete item  (kept for backwards compatibility)
         e.preventDefault();
         const itemName = $(this).data("item");
 
