@@ -1263,37 +1263,47 @@ function showContextMenu(e, itemName, itemCount, itemLabel) {
     setTimeout(closeContextMenu, 15000);
 }
 
-// Track double right click
-let lastRightClickTime = 0;
-let lastRightClickTarget = null;
-
-// Add middle mouse button (wheel click) handler for taking all items
+// Add middle mouse button (wheel click) handlers
 $(document).on("mousedown", ".item-slot", function(e) {
-    // Middle mouse button (wheel click) with Shift = take all items
-    if (e.which === 2 && e.shiftKey) {
+    if (e.which === 2) { // Middle mouse button
         e.preventDefault();
 
         const itemName = $(this).data("item");
         const itemCount = $(this).data("count");
         const isInSafe = $(this).closest("#inventory-safe").length > 0;
 
-        if (itemName && itemCount >= 1) {
-            // Set the correct hover data for MoveAllItems
-            if (isInSafe) {
-                hoveredItem = {
-                    name: itemName,
-                    invType: 'inventory-safe'
-                };
-            } else {
-                hoveredItem = {
-                    name: itemName,
-                    invType: 'inventory'
-                };
-            }
+        // Shift + Middle Click = take all items
+        if (e.shiftKey) {
+            if (itemName && itemCount >= 1) {
+                // Set the correct hover data for MoveAllItems
+                if (isInSafe) {
+                    hoveredItem = {
+                        name: itemName,
+                        invType: 'inventory-safe'
+                    };
+                } else {
+                    hoveredItem = {
+                        name: itemName,
+                        invType: 'inventory'
+                    };
+                }
 
-            // Use MoveAllItems to transfer everything at once
-            MoveAllItems(itemName);
+                // Use MoveAllItems to transfer everything at once
+                MoveAllItems(itemName);
+            }
         }
+        // Simple Middle Click = delete item
+        else {
+            if (itemName) {
+                // Only allow deletion from regular inventory, not safe
+                if (!isInSafe) {
+                    $.post("https://gamemode/deleteItem", JSON.stringify({
+                        item: itemName,
+                    }));
+                }
+            }
+        }
+
         return false;
     }
 });
@@ -1305,49 +1315,25 @@ $(document).on("contextmenu", ".item-slot", function (e) {
         return;
     }
 
-    // Double right click detection (delete item)
-    const currentTime = Date.now();
-    const timeDiff = currentTime - lastRightClickTime;
-    const isSameTarget = lastRightClickTarget === this;
+    e.preventDefault(); // Prevent default context menu
 
-    if (timeDiff < 500 && isSameTarget) { // 500ms for double click
-        e.preventDefault();
-        const itemName = $(this).data("item");
+    const itemName = $(this).data("item");
+    const itemCount = $(this).data("count");
+
+    // Handle Ctrl + Right click for delete (backwards compatibility)
+    if (e.ctrlKey) {
         if (itemName) {
-            // Double right click = delete item
             $.post("https://gamemode/deleteItem", JSON.stringify({
                 item: itemName,
             }));
         }
-        lastRightClickTime = 0;
-        lastRightClickTarget = null;
         return;
     }
 
-    lastRightClickTime = currentTime;
-    lastRightClickTarget = this;
-
-    if (!e.ctrlKey) {
-        e.preventDefault();
-
-        const itemName = $(this).data("item");
-        const itemCount = $(this).data("count");
-
-        if (itemName && itemCount) {
-            // Get item label from tblItems
-            const itemLabel = tblItems[itemName] ? tblItems[itemName].label : itemName;
-            showContextMenu(e, itemName, itemCount, itemLabel);
-        }
-    } else {
-        // Ctrl + Right click to delete item  (kept for backwards compatibility)
-        e.preventDefault();
-        const itemName = $(this).data("item");
-
-        if (itemName) {
-            $.post("https://gamemode/deleteItem", JSON.stringify({
-                item: itemName,
-            }));
-        }
+    // Regular right click - show context menu
+    if (itemName && itemCount) {
+        const itemLabel = tblItems[itemName] ? tblItems[itemName].label : itemName;
+        showContextMenu(e, itemName, itemCount, itemLabel);
     }
 });
 
