@@ -709,7 +709,7 @@ function updateLeaderboard(type, podiumData, leaderboardData) {
                 <th>Player</th>
                 <th>Kills</th>
                 <th>Deaths</th>
-                <th>Tokens</th>
+                <th>K/D</th>
                 <th>Country</th>
             `;
             break;
@@ -717,6 +717,16 @@ function updateLeaderboard(type, podiumData, leaderboardData) {
             headerTemplate = `
                 <th>#</th>
                 <th>Player</th>
+                <th>Deaths</th>
+                <th>Country</th>
+            `;
+            break;
+        case 'kd':
+            headerTemplate = `
+                <th>#</th>
+                <th>Player</th>
+                <th>K/D Ratio</th>
+                <th>Kills</th>
                 <th>Deaths</th>
                 <th>Country</th>
             `;
@@ -755,12 +765,25 @@ function updateLeaderboard(type, podiumData, leaderboardData) {
                                 <div class="stat-label">Deaths</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">${formatNumberWithCommas(player.tokens || player.token || 0)}</div>
-                                <div class="stat-label">Tokens</div>
+                                <div class="stat-value">${((player.kills || 0) / Math.max(1, player.deaths || player.death || 1)).toFixed(2)}</div>
+                                <div class="stat-label">K/D</div>
                             </div>
                         ` : type === 'deaths' ? `
                             <div class="stat-item">
                                 <div class="stat-value">${player.death || 0}</div>
+                                <div class="stat-label">Deaths</div>
+                            </div>
+                        ` : type === 'kd' ? `
+                            <div class="stat-item">
+                                <div class="stat-value">${((player.kills || 0) / Math.max(1, player.deaths || player.death || 1)).toFixed(2)}</div>
+                                <div class="stat-label">K/D Ratio</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${player.kills || 0}</div>
+                                <div class="stat-label">Kills</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${player.deaths || player.death || 0}</div>
                                 <div class="stat-label">Deaths</div>
                             </div>
                         ` : `
@@ -792,9 +815,13 @@ function updateLeaderboard(type, podiumData, leaderboardData) {
                     ${type === 'kills' ? `
                         <td>${player.kills || 0}</td>
                         <td>${player.deaths || player.death || 0}</td>
-                        <td>${formatNumberWithCommas(player.tokens || player.token || 0)}</td>
+                        <td>${((player.kills || 0) / Math.max(1, player.deaths || player.death || 1)).toFixed(2)}</td>
                     ` : type === 'deaths' ? `
                         <td>${player.death || 0}</td>
+                    ` : type === 'kd' ? `
+                        <td>${((player.kills || 0) / Math.max(1, player.deaths || player.death || 1)).toFixed(2)}</td>
+                        <td>${player.kills || 0}</td>
+                        <td>${player.deaths || player.death || 0}</td>
                     ` : `
                         <td>${formatNumberWithCommas(player.token || 0)}</td>
                     `}
@@ -837,6 +864,7 @@ function SelectLeaderboard(type) {
     const backendType = {
         'kills': 'player',
         'deaths': 'death',
+        'kd': 'player',  // K/D uses player data too
         'tokens': 'token',
         'crew': 'crew'
     }[type] || 'player';

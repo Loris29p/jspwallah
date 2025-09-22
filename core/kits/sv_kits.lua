@@ -18,7 +18,7 @@ local listKits = {
         {name = "weapon_bullpuprifle_mk2", count = 15, label = "Fusil Bullpup MK II"},
         {name = "buffalo4", count = 45, label = "Buffalo STX"},
     }, time = 7200}, 
-    {kit = "vip", label = "^3Vip", role = {"vip", "vip+", "mvp"}, listItems = {
+    {kit = "vip", label = "^3Vip", role = {"vip", "vip+"}, listItems = {
         {name = "weapon_marksmanrifle", count = 1, label = "Marksman Rifle"},
         {name = "weapon_specialcarbine", count = 10, label = "Special Carbine"},
         {name = "weapon_carbinerifle_mk2", count = 10, label = "Carbine Rifle Mk II"},
@@ -27,7 +27,7 @@ local listKits = {
         {name = "buffalo4", count = 40, label = "Buffalo STX"},
 
     }, time = 14400},
-    {kit = "vip+", label = "^2Vip+", role = {"vip+", "mvp"}, listItems = {
+    {kit = "vip+", label = "^2Vip+", role = {"vip+"}, listItems = {
         {name = "weapon_marksmanrifle", count = 1, label = "Marksman Rifle"},
         {name = "weapon_specialcarbine", count = 25, label = "Special Carbine"},
         {name = "weapon_combatmg_mk2", count = 15, label = "Combat MG MK II"},

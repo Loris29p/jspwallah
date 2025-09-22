@@ -220,7 +220,7 @@ function GlobalDeath(killerPed, type)
 end
 
 function ShowDeathScreen(data)
-    if data.bool then 
+    if data.bool then
         SendNUIMessage({
             type = "deathframe",
             bool = true,
@@ -229,7 +229,7 @@ function ShowDeathScreen(data)
             uuid = data.uuid,
             armor = data.armor,
             health = data.health,
-            deathmessage = data.message,
+            deathmessage = data.message, -- Fixed: using message which is what server sends
         })
     else
         SendNUIMessage({
