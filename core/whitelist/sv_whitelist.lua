@@ -1,5 +1,5 @@
 local Config = {
-    DiscordToken = "...",
+    DiscordToken = GetConvar("discord_token", ""),
     GuildId = 1349955944766902343,
     Roles = {
         ["user"] = 1354431662750171228,
