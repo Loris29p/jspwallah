@@ -136,8 +136,26 @@ end)
 
 _RegisterNetEvent("PREFIX_PLACEHOLDER:c:LoadCrew", function(tblData)
     CrewData = tblData
-    CrewData.myRank = GetMyRank()
-    Logger:trace("CREW", "Crew loaded")
+    if CrewData then
+        CrewData.myRank = GetMyRank()
+        Logger:trace("CREW", "Crew loaded")
+        -- Auto-refresh UI when crew data is loaded
+        SendNUIMessage({
+            type = "sendCrewData",
+            haveCrew = true,
+            isLeader = CrewData.myRank == "leader",
+            crewName = CrewData.crewName,
+            crewTag = CrewData.crewTag,
+            crewDescription = CrewData.description,
+            crewTotalKills = CrewData.kills,
+            crewTotalKillsRedzone = CrewData.killsRedzone,
+            crewTotalAirdrops = CrewData.aidropTaken,
+            crewTotalCupWins = CrewData.cupWin,
+            crewMembers = CrewData.members,
+            rankList = CrewData.rankList,
+            flag = CrewData.flag
+        })
+    end
 end)
 
 

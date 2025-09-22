@@ -176,61 +176,124 @@ end
 --     end
 -- end)
 
-RegisterCommand("deletecrew", function(src, args)
+-- Table pour stocker les confirmations en attente
+local pendingLeaveConfirmations = {}
+
+RegisterCommand("leavecrew", function(src, args)
     local CrewDat = GetMyCrewInfo(src)
-    if CrewDat then
-        local playerRole = CrewDat:GetMemberRole(GetPlayerId(src).uuid)
-        if playerRole == "leader" then
-            DoNotif(src,"~HUD_COLOUR_RED~You are leaving your crew and it will be deleted")
+    if not CrewDat then
+        return DoNotif(src, "~HUD_COLOUR_RED~You are not in a crew")
+    end
+
+    local playerRole = CrewDat:GetMemberRole(GetPlayerId(src).uuid)
+
+    if playerRole == "leader" then
+        -- Pour le leader, demander confirmation
+        pendingLeaveConfirmations[src] = {
+            time = os.time() + 30, -- 30 secondes pour confirmer
+            crewName = CrewDat.crewName
+        }
+        DoNotif(src, "~HUD_COLOUR_RED~WARNING: You are the leader! Your crew will be DELETED!")
+        DoNotif(src, "~HUD_COLOUR_YELLOW~Type /confirmleave within 30 seconds to confirm")
+    else
+        -- Pour les membres normaux, quitter directement avec actualisation
+        if LeaveCrew(src) then
+            -- Actualiser l'UI pour tous les membres restants
+            UpdateAllCrewMembersUI(CrewDat.crewId)
         end
     end
-    
-    if LeaveCrew(src) then 
-        -- Le message sera affiché par la fonction LeaveCrew selon le rôle
+end)
+
+RegisterCommand("confirmleave", function(src, args)
+    if not pendingLeaveConfirmations[src] then
+        return DoNotif(src, "~HUD_COLOUR_RED~No pending leave confirmation")
+    end
+
+    if os.time() > pendingLeaveConfirmations[src].time then
+        pendingLeaveConfirmations[src] = nil
+        return DoNotif(src, "~HUD_COLOUR_RED~Confirmation expired. Use /leavecrew again")
+    end
+
+    local CrewDat = GetMyCrewInfo(src)
+    if CrewDat then
+        local crewId = CrewDat.crewId
+        if LeaveCrew(src) then
+            DoNotif(src, "~HUD_COLOUR_RED~You have left and deleted your crew: " .. pendingLeaveConfirmations[src].crewName)
+        end
+    end
+
+    pendingLeaveConfirmations[src] = nil
+end)
+
+-- Nettoyer les confirmations expirées
+Citizen.CreateThread(function()
+    while true do
+        Wait(5000)
+        local currentTime = os.time()
+        for playerId, data in pairs(pendingLeaveConfirmations) do
+            if currentTime > data.time then
+                pendingLeaveConfirmations[playerId] = nil
+            end
+        end
     end
 end)
 
 function LeaveCrew(src)
     local CrewDat = GetMyCrewInfo(src)
-    if CrewDat then 
+    if CrewDat then
         local playerRole = CrewDat:GetMemberRole(GetPlayerId(src).uuid)
-        
+        local crewId = CrewDat.crewId
+
         -- Si le joueur est le leader, supprimer le crew entier
-        if playerRole == "leader" then  
-            if DeleteCrew(CrewDat.crewId) then 
+        if playerRole == "leader" then
+            if DeleteCrew(CrewDat.crewId) then
                 DoNotif(src,"~HUD_COLOUR_RED~You have left your crew and it has been deleted")
                 _TriggerClientEvent("PREFIX_PLACEHOLDER:c:ReceiveLeaveCrew", src)
                 return true
             end
         end
-        
+
         -- Si ce n'est pas le leader, juste retirer le membre
         CrewDat:RemoveMembers({
             uuid = GetPlayerId(src).uuid,
         })
         _TriggerClientEvent("PREFIX_PLACEHOLDER:c:ReceiveLeaveCrew", src)
         DoNotif(src,"~HUD_COLOUR_GREEN~You have left your crew")
-        
+
         -- Vérifier si le crew est maintenant vide et le supprimer si nécessaire
         if #CrewDat.members == 0 then
             print("Crew " .. CrewDat.crewName .. " is now empty after member left, deleting...")
             DeleteCrew(CrewDat.crewId)
             return true
         end
-        
-        -- Mettre à jour la liste des joueurs en ligne
-        if OnlineCrewPlayers[CrewDat.crewId] then
-            for k, v in pairs(OnlineCrewPlayers[CrewDat.crewId]) do 
-                if v.source == src then 
-                    table.remove(OnlineCrewPlayers[CrewDat.crewId], k)
+
+        -- Mettre à jour la liste des joueurs en ligne et actualiser l'UI
+        if OnlineCrewPlayers[crewId] then
+            for k, v in pairs(OnlineCrewPlayers[crewId]) do
+                if v.source == src then
+                    table.remove(OnlineCrewPlayers[crewId], k)
                     _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrewOnline", src, nil)
+                else
+                    -- Actualiser l'UI pour les membres restants
+                    _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrew", v.source, CrewDat)
+                    _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrewOnline", v.source, OnlineCrewPlayers[crewId])
                 end
-                _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrewOnline", v.source, OnlineCrewPlayers[CrewDat.crewId])
             end
         end
         return true
     end
     return false
+end
+
+-- Fonction pour actualiser l'UI de tous les membres du crew
+function UpdateAllCrewMembersUI(crewId)
+    local CrewDat = GetCrewData(crewId)
+    if CrewDat and OnlineCrewPlayers[crewId] then
+        for k, v in pairs(OnlineCrewPlayers[crewId]) do
+            _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrew", v.source, CrewDat)
+            _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrewOnline", v.source, OnlineCrewPlayers[crewId])
+        end
+    end
 end
 
 RegisterCallback("callback:crew:LeaveCrew", function(src)
@@ -840,3 +903,87 @@ function GetTableLength(t)
     end
     return count
 end
+
+-- Système d'annonce crew
+RegisterCommand("crewannounce", function(src, args)
+    if src == 0 then return end -- Empêcher l'utilisation depuis la console
+
+    local CrewDat = GetMyCrewInfo(src)
+    if not CrewDat then
+        return DoNotif(src, "~HUD_COLOUR_RED~You are not in a crew")
+    end
+
+    local playerRole = CrewDat:GetMemberRole(GetPlayerId(src).uuid)
+
+    -- Vérifier les permissions (leader, co-leader et recruiter peuvent annoncer)
+    if playerRole ~= "leader" and playerRole ~= "coleader" and playerRole ~= "recruit" then
+        return DoNotif(src, "~HUD_COLOUR_RED~You don't have permission to send crew announcements")
+    end
+
+    -- Joindre tous les arguments en un seul message
+    local message = table.concat(args, " ")
+
+    if message == "" or message == " " then
+        return DoNotif(src, "~HUD_COLOUR_RED~Usage: /crewannounce <message>")
+    end
+
+    -- Envoyer l'annonce à tous les membres du crew en ligne
+    if OnlineCrewPlayers[CrewDat.crewId] then
+        local senderName = GetPlayerId(src).username
+        local roleLabel = ""
+
+        -- Obtenir le label du rôle
+        for _, rank in pairs(CrewDat.rankList) do
+            if rank.name == playerRole then
+                roleLabel = rank.label
+                break
+            end
+        end
+
+        for k, v in pairs(OnlineCrewPlayers[CrewDat.crewId]) do
+            _TriggerClientEvent("ShowAboveRadarMessage", v.source,
+                string.format("~b~[CREW] ~y~[%s] ~g~%s: ~w~%s", roleLabel, senderName, message))
+
+            -- Jouer un son de notification
+            _TriggerClientEvent("PlaySound", v.source, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET")
+        end
+    end
+end)
+
+-- Alias pour la commande
+RegisterCommand("ca", function(src, args)
+    -- Rediriger vers la commande principale
+    ExecuteCommand("crewannounce " .. table.concat(args, " "))
+end)
+
+-- Fonction d'annonce serveur pour les événements automatiques
+function SendCrewAnnouncement(crewId, message)
+    if OnlineCrewPlayers[crewId] then
+        for k, v in pairs(OnlineCrewPlayers[crewId]) do
+            _TriggerClientEvent("ShowAboveRadarMessage", v.source,
+                string.format("~b~[CREW] ~w~%s", message))
+        end
+    end
+end
+
+-- Event pour les annonces depuis le client (si besoin)
+_RegisterServerEvent("PREFIX_PLACEHOLDER:c:SendCrewAnnounce", function(message)
+    local src = source
+    local CrewDat = GetMyCrewInfo(src)
+
+    if not CrewDat then return end
+
+    local playerRole = CrewDat:GetMemberRole(GetPlayerId(src).uuid)
+
+    if playerRole ~= "leader" and playerRole ~= "coleader" and playerRole ~= "recruit" then
+        return
+    end
+
+    if OnlineCrewPlayers[CrewDat.crewId] then
+        local senderName = GetPlayerId(src).username
+        for k, v in pairs(OnlineCrewPlayers[CrewDat.crewId]) do
+            _TriggerClientEvent("ShowAboveRadarMessage", v.source,
+                string.format("~b~[CREW] ~g~%s: ~w~%s", senderName, message))
+        end
+    end
+end)
