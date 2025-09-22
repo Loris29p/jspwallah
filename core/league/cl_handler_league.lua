@@ -14,23 +14,19 @@ local function SafeJsonEncode(data)
 end
 
 _RegisterNetEvent("league:myTeamData", function(type, data)
-    if type == "initData" then 
+    if type == "initData" then
+        -- Clean up any existing gamertags before initializing new ones
+        CleanupGamertags()
+
         GM.MyTeamData = data
         changeModel(GM.MyTeamData.ped)
         RefreshLeagueUI()
-        
-        SetupGamertags()
-        SetHealthAndArmour()
-        
-        Citizen.SetTimeout(3000, function()
+
+        -- Setup gamertags once after a small delay
+        Citizen.SetTimeout(500, function()
             if GM.MyTeamData then
                 SetupGamertags()
-            end
-        end)
-        
-        Citizen.SetTimeout(10000, function()
-            if GM.MyTeamData then
-                SetupGamertags()
+                SetHealthAndArmour()
             end
         end)
     elseif type == "leaveTeam" then 
@@ -40,11 +36,15 @@ _RegisterNetEvent("league:myTeamData", function(type, data)
         SetTimerBarAsNoLongerNeeded(GM.BarLeague)
         RefreshLeagueUI()
         CleanupGamertags() -- Clean up gamertags when leaving team
-    elseif type == "update" then 
+    elseif type == "update" then
         GM.MyTeamData = data
         RefreshLeagueUI()
-    elseif type == "initGamertags" then 
-        SetupGamertags()
+        -- Don't recreate gamertags on update, just refresh the UI
+    elseif type == "initGamertags" then
+        -- Only setup gamertags if we don't have any active ones
+        if not isGamertagsThreadActive then
+            SetupGamertags()
+        end
     end
 end)
 
@@ -78,11 +78,15 @@ end
 
 function SetupGamertags()
     if GM.Player.InLeague and GM.MyTeamData then
+        -- Always cleanup existing gamertags before setting up new ones
         CleanupGamertags()
-        
+
+        -- Add a small delay to ensure cleanup is complete
+        Wait(100)
+
         if not isGamertagsThreadActive then
             isGamertagsThreadActive = true
-            
+
             CreateThread(function()
                 Wait(1000)
                 
@@ -107,10 +111,10 @@ function SetupGamertags()
                     
                     -- Create or update gamertags for each player
                     for k, player in pairs(GM.MyTeamData.players) do
-                        
+
                         -- Skip if this is the local player
                         if player.src == myPlayerServerId then
-
+                            -- Skip local player
                         else
                             local playerFromServerId = GetPlayerFromServerId(player.src)
                             
@@ -140,26 +144,15 @@ function SetupGamertags()
                                         
                                         -- Try different approaches for creating the gamerTag
                                         -- First try with player index
+                                        -- Use player ped directly for CreateMpGamerTag
                                         local gamerTagId = CreateMpGamerTag(
-                                            playerFromServerId,
+                                            playerPed, -- Use ped directly, not server ID
                                             displayText,
                                             false, -- isn't networked
                                             false, -- don't show in extended view
-                                            "", -- custom player name, we'll use the format directly in the main text
+                                            "", -- custom player name
                                             0 -- clan tag
                                         )
-                                        
-                                        -- If that failed, try with player ped
-                                        if gamerTagId == 0 or gamerTagId == -1 then
-                                            gamerTagId = CreateMpGamerTag(
-                                                playerPed, -- Try directly with ped
-                                                displayText,
-                                                false,
-                                                false,
-                                                "",
-                                                0
-                                            )
-                                        end
                                         
                                         if gamerTagId ~= 0 and gamerTagId ~= -1 then
                                             myTeamGamertags[player.src] = gamerTagId
@@ -187,11 +180,11 @@ function SetupGamertags()
                                             
                                             local displayText = string.format("%s (%s) Kills: %s", player.username, player.src, player.kills)
                                             local newGamerTagId = CreateMpGamerTag(
-                                                playerFromServerId,
+                                                playerPed, -- Use ped, not server ID
                                                 displayText,
                                                 false, -- isn't networked
                                                 false, -- don't show in extended view
-                                                "", -- custom player name, we'll use the format directly in the main text
+                                                "", -- custom player name
                                                 0 -- clan tag
                                             )
                                             
