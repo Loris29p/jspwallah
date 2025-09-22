@@ -1,0 +1,48 @@
+@font-face {
+    font-family: "Purista Medium";
+    src: url("../assets/PuristaMedium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Purista SemiBold";
+    src: url("../assets/PuristaSemiBold.otf") format("opentype");
+}
+
+.welcome-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1000;
+}
+
+.welcome-text {
+    font-size: 10vw;
+    color: white;
+    font-family: "Purista Medium";
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.sub-text {
+    font-size: 5vw;
+    color: white;
+    font-family: "Purista Medium";
+    margin-top: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.highlight {
+    color: #ff0000; /* Rouge */
+}
+
+@media screen and (max-width: 768px) {
+    .welcome-text {
+        font-size: 12vw;
+    }
+    
+    .sub-text {
+        font-size: 4vw;
+    }
+}

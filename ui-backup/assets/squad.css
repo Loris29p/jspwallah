@@ -1,0 +1,887 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+
+body {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.741);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-variant: tabular-nums;
+  line-height: 1.66667;
+  font-feature-settings: 'tnum';
+}
+
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+*, body, html, .row {
+  margin: 0;
+  padding: 0;
+}
+div {
+  display: block;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  --antd-wave-shadow-color: #339933;
+  --scroll-bar: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 1vh;
+}
+.theme-default ::-webkit-scrollbar-thumb {
+  background: #0B0C0D;
+}
+.theme-default ::-webkit-scrollbar-track {
+  background: rgba(47, 47, 51, 0.7);
+}
+::selection {
+  color: #fff;
+  background: #339933;
+}
+
+:not(svg) {
+  transform-origin: 0px 0px;
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.squad-menu {
+  display: flex;
+  width: 40vw;
+  height: 52vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  animation-duration: 250ms;
+  animation-name: fadeout;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  user-select: none;
+}
+.theme-default .squad-menu {
+  color: rgb(78, 78, 78);
+}
+.squad-menu .squad-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  margin-right: 2vh;
+}
+.squad-menu .squad-main .title {
+  color: white;
+  font-size: 1.5vh;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.squad-menu .squad-main .header {
+  display: flex;
+  flex-direction: row;
+  height: 8vh;
+  padding: 2vh;
+  margin-bottom: 2vh;
+}
+.theme-default .squad-menu .squad-main .header {
+  background-color: rgb(19, 21, 23);
+}
+.squad-menu .squad-main .header .ui-button {
+  white-space: nowrap;
+  font-size: 1.4vh;
+  padding: 1vh;
+  margin-right: 1vh;
+  border-radius: 0;
+}
+.squad-menu .squad-main .squad-content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 2vh;
+}
+.theme-default .squad-menu .squad-main .squad-content {
+  background-color: rgb(19, 21, 23);
+}
+.squad-menu .squad-main .squad-content .no-squad {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.squad-menu .squad-main .squad-content .no-squad .message {
+  margin-bottom: 1vh;
+}
+.theme-default .squad-menu .squad-main .squad-content .no-squad .message {
+  color: rgb(200, 200, 200);
+}
+.squad-menu .squad-main .squad-content .no-squad .ui-button {
+  white-space: nowrap;
+  font-size: 1.3vh;
+  padding: 1.5vh;
+  height: 0px;
+}
+.squad-menu .squad-main .squad-content .squad-others {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  animation-duration: 250ms;
+  animation-name: fadeout;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items {
+  display: block;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  margin-top: 1vh;
+  padding-bottom: 2vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 5vh;
+  background-color: black;
+  padding: 1vh;
+  margin-bottom: 1vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item img {
+  width: 4vh !important;
+  height: 4vh !important;
+  margin-top: -6px;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  padding-left: 1vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item .info .name {
+  font-weight: bold;
+  font-size: 1.3vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item .info .desc {
+  font-size: 1.1vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item .ui-button {
+  padding: 0 2vh;
+}
+.squad-menu .squad-main .squad-content .squad-others .squad-list-items .squad-list-item .ui-button.end {
+  margin-left: auto;
+}
+.squad-menu .squad-main .squad-content .squad-management {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  animation-duration: 250ms;
+  animation-name: fadeout;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+}
+.squad-menu .squad-main .squad-content .squad-management .category {
+  display: flex;
+  flex-direction: column;
+}
+.squad-menu .squad-main .squad-content .squad-management .category:first-child {
+  margin-bottom: 1vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 5vh;
+  align-items: center;
+  background-color: rgba(14, 14, 14, 0.7);
+  color: white;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member .picture-profil {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 5vh;
+  height: 5vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member .icon-user {
+  margin-left: 1vh;
+  font-size: 1.5vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member .name {
+  font-size: 1.5vh;
+  font-weight: bold;
+  font-family: "Segoe UI", sans-serif;
+  margin-left: 1vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member .ui-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vh;
+  padding: 1vh;
+  font-size: 1.3vh;
+  height: auto;
+  text-align: center;
+  width: 8vh;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member .ui-button.end {
+  margin-left: auto;
+}
+.theme-default .squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member:not(.none):hover {
+  background-color: #998d8f;
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-members .squad-member.none {
+  background-color: rgba(50, 50, 50, 0.7);
+}
+.squad-menu .squad-main .squad-content .squad-management .category .squad-settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.picture-profil {
+  display: flex;
+  width: 3.5vh;
+  height: 3.5vh;
+  position: relative;
+  flex-direction: column;
+  margin: 0.25vh;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.picture-profil .image {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+
+.squad-hud-container {
+display: flex;
+position: absolute;
+top: 0;
+left: 0;
+width: 14vw;
+min-height: 200px;
+flex-direction: column-reverse;
+padding-top: 6vh;
+margin: 2vh;
+margin-left: 1.5vh;
+}
+.squad-hud-container.right-radar {
+top: auto;
+bottom: 0;
+margin-left: 13vw;
+margin-bottom: 2vh;
+}
+.squad-hud-container.right-radar.aspect-ratio-4-3 {
+margin-left: 16.5vw;
+}
+.squad-hud-container.right-radar.aspect-ratio-3-2 {
+margin-left: 15vw;
+}
+.squad-hud-container.right-radar.aspect-ratio-5-3 {
+margin-left: 13.5vw;
+}
+.squad-hud-container.right-radar.aspect-ratio-5-4 {
+margin-left: 17.5vw;
+}
+.squad-hud-container.right-radar.aspect-ratio-16-10 {
+margin-left: 14vw;
+}
+
+
+
+.squad-item {
+display: flex;
+flex-direction: row;
+width: 100%;
+user-select: none;
+align-items: center;
+height: 4vh;
+overflow: hidden;
+align-items: center;
+justify-items: center;
+margin-bottom: 0.5vh;
+font-family: "San Francisco", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+background-color: rgba(0, 0, 0, 0.6);
+}
+.squad-item .avatar {
+display: flex;
+width: 3.5vh;
+height: 3.5vh;
+position: relative;
+flex-direction: column;
+margin: 0.25vh;
+}
+.squad-item .avatar .image {
+position: absolute;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+width: 100%;
+height: 100%;
+z-index: 1;
+background-image: url("https://files.gtaliferp.fr/extinction/default-avatar.jpg");
+}
+.squad-item .info-container {
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 100%;
+padding-left: 0.5vh;
+margin-top: auto;
+margin-right: 0.5vh;
+}
+.squad-item .info-container .name-row {
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.squad-item .info-container .name-row .name {
+font-size: 1.4vh;
+color: white;
+margin-top: auto;
+white-space: nowrap;
+text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+.squad-item .info-container .name-row .speaker {
+color: transparent;
+}
+.squad-item .info-container .name-row .speaker.active {
+color: rgb(221, 221, 221);
+}
+.squad-item .info-container .name-row .leader {
+margin-right: 6px;
+margin-left: 0px;
+color: rgb(221, 221, 221);
+}
+.squad-item .info-container .name-row > svg {
+margin-left: 6px;
+}
+.squad-item .info-container .armor {
+width: 100%;
+height: 0.3vh;
+margin-bottom: 1px;
+}
+.squad-item .info-container .armor .filled {
+height: 100%;
+background-color: rgb(16, 149, 168);
+transition: width 1s ease-in-out;
+}
+.squad-item .info-container .health {
+width: 100%;
+height: 0.5vh;
+background-color: rgba(0, 0, 0, 0.6);
+}
+.squad-item .info-container .health .filled {
+height: 100%;
+background: rgb(221, 221, 221);
+transition: width 1s ease-in-out;
+}
+.squad-item .info-container .health .filled.too-far {
+background-color: rgb(82, 82, 82);
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    isolation: isolate;
+    margin: 0;
+}
+
+.squad {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 38vw;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.barrehautsquad {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8vh;
+    background: #131517;
+    color: white;
+    font-size: 0.75vw;
+}
+
+.mysquad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1vw;
+    width: 15%;
+    height: 4vh;
+    border: solid 1.5px #6c1374b0;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.joinsquad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1vw;
+    width: 30%;
+    height: 4vh;
+    border: solid 1.5px #6c1374b0;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.activehautsquad {
+    background: #6c1374b0;
+}
+
+.mysquad:hover  {
+    background: #1b1e20;
+}
+
+.joinsquad:hover  {
+    background: #1b1e20;
+}
+
+.activehautsquad:hover {
+    background: #6c1374b0;
+}
+
+
+.barrebassquad {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-top: 5%;
+    background: #131517;
+    width: 100%;
+    height: 85%;
+}
+
+.donthavesquad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background: #131517;
+    width: 100%;
+    height: 100%;
+}
+
+.createsquad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background: #6c1374b0;
+    margin-top: 1vh;
+    width: 27%;
+    height: 8%;
+    border-radius: 1.5vw;
+    cursor: pointer;
+    font-size: 0.75vw;
+}
+
+.lasquad {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.mysquadinsquad {
+    margin-top: 0.75vw;
+    margin-left: 1vw;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 0.9vw;
+    width: 20%;
+    height: 7.5%;
+}
+
+.allmemberinsquad {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #292A2B;
+    width: 95%;
+    height: 45%;
+    font-size: 0.75vw;
+}
+
+.membersquaditem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 25%;
+    background: #0E1011;
+}
+
+.usernameplayerquad {
+    margin-left: 1vw;
+}
+
+.actionplayersquad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1vw;
+    width: 12.5%;
+    height: 75%;
+    background: #1B1B1B;
+    border: solid 1px #6c1374b0;
+    transition: all 200ms ease-in;
+}
+
+.actionplayersquad:hover {
+    background-color: #6c1374b0;
+}
+
+.additemsquad {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    height: 25%;
+}
+
+.addsquad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 1vw;
+    width: 12.5%;
+    height: 75%;
+    background: #6c1374b0;
+    border-radius: 0.3vw;
+}
+
+.textoption {
+    display: flex;
+    align-self: start;
+    margin-top: 0.75vw;
+    margin-left: 1vw;
+    font-size: 0.9vw;
+    height: 7.5%;
+}
+
+.alloption {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75vw;
+    width: 95%;
+}
+
+.private {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.textprivate {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+.letextprivate {
+    height: 40%;
+}
+
+.putsquad {
+    color: #909090;
+    font-size: 0.6vw;
+}
+
+.lacheckbox {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    width: 3%;
+    height: 75%;
+    
+    
+}
+
+#privatequad {
+    cursor: pointer;
+}
+
+
+.fa-user {
+    margin-right: 0.25vw;
+}
+
+.deletesquad {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 4vh;
+}
+
+.textdelete {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+.textdeletesquad {
+    height: 40%;
+}
+
+.textdeleteyoursquad {
+    color: #909090;
+    font-size: 0.6vw;
+}
+
+.buttondeletesquad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #6c1374b0;
+    background: #1B1B1B;
+    width: 15%;
+    height: 75%;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.buttondeletesquad:hover {
+    background: #6c1374b0;
+}
+
+.forjoinsquad {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 0.75vw;
+}
+
+.textpublicsquad {
+    display: flex;
+    align-self: start;
+    margin-top: 0.75vw;
+    margin-left: 1vw;
+    font-size: 0.9vw;
+    margin-bottom: 1vh;
+}
+
+.allsquad {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 95%;
+    height: 85%;
+}
+
+.squaditem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 11%;
+    background: #0C0C0D;
+    margin-top: 1vh;
+}
+
+#imgsquad {
+    width: 1.8vw;
+    height: 3.6vh;
+    margin-left: 0.25vw;
+}
+
+.alltextnamesquad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0.75vw;
+    width: 80%;
+    height: 100%;
+}
+
+.namesquad {
+    height: 45%;
+    font-size: 0.8vw;
+}
+
+.membersquad {
+    color: #909090;
+    font-size: 0.65vw;
+}
+
+.joinsquaditem {
+    display: flex;
+    align-items: center;
+    border-radius: 0.2vw;
+    border: 1px solid #6c1374b0;
+    background: #1B1B1B;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 1vw;
+    width: 10%;
+    height: 75%;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.joinsquaditem:hover {
+    background: #6c1374b0;
+}
+
+
+.hudsquad {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 11.71875vw;
+    height: 21vh;
+    top: 10%;
+    left: 2%;
+}
+
+.allmemberinsquadhud {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.memberhuditem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 5vh;
+    margin-top: 0.25vh;
+    background: rgba(12,12,12,0.5);
+    align-items: center;
+}
+
+#imghudsquad {
+    width: 1.9vw;
+    height: 3.8vh;
+    margin-left: 0.4vw;
+}
+
+.allinfomemberhudsquad {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    color: white;
+    width: 100%;
+    margin-left: 0.4vw;
+    margin-bottom: 0.5vh;
+    height: 100%;
+}
+
+.player-armor-bar-squad {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 15%;
+    gap: 0.4vh;
+}
+
+.armor-plate-squad {
+    display: flex;
+    width: 25%;
+    height: 100%;
+    background: var(--case);
+}
+
+.fill-squad {
+    display: flex;
+    position: relative;
+    width: var(--percentage);
+    height: 100%;
+    background: #6c1374b0;
+}
+
+.player-hp-bar-squad {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 15%;
+    background: var(--case);
+    margin-top: 0.3vh;
+}
+
+.progress-squad {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #ffff;
+}
+
+.pseudohudsquad {
+    height: 55%;
+}

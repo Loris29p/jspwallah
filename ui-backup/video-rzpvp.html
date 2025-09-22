@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.youtube.com https://s.ytimg.com 'unsafe-inline'; frame-src https://www.youtube.com; img-src 'self' https://i.ytimg.com https://www.youtube.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com;">
+  <title>Vidéo YouTube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./video-assets/videos-assets.css">
+  <!-- Ajout de l'API YouTube -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./video-assets/video-assets.js"></script>
+</head>
+<body>
+  <div class="videos-container">
+    <!-- Le conteneur de la vidéo sera ajouté ici par le JavaScript -->
+    <div class="video-title"></div>
+    <div id="youtube-player"></div>
+  </div>
+</body>
+</html>

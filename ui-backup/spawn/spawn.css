@@ -1,0 +1,65 @@
+
+@font-face {
+    font-family: "Purista Medium";
+    src: url("../assets/PuristaMedium.otf");
+  }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Purista Medium";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#text-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+  max-width: 800px;
+}
+
+.text-line {
+  margin: 5px 0;
+  font-size: 3vw;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.text-line.fade-out {
+  opacity: 0;
+}
+
+/* For different color options */
+.color-red { color: #ff5555; }
+.color-blue { color: #5555ff; }
+.color-green { color: #55ff55; }
+.color-yellow { color: #ffff55; }
+.color-purple { color: #aa55ff; }
+.color-orange { color: #ffaa55; }
+
+/* Ensure spans inherit base styles */
+.text-line span {
+  text-shadow: inherit;
+}
+
+/* For responsive text sizing */
+@media (max-width: 768px) {
+  .text-line {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-line {
+    font-size: 2vw;
+  }
+}

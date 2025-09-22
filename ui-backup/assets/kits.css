@@ -1,0 +1,64 @@
+.kit-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kits-window {
+    display: flex;
+    z-index: 4;
+    flex-direction: column;
+    font-family: "Purista Medium";
+    overflow: hidden;
+    width: 20vw;
+    height: 50vh;
+  }
+  .theme-default .kits-window {
+    background-color: rgb(19, 21, 23);
+    border: 1px solid #565E66;
+  }
+  .kits-window .window-header {
+    font-size: 2.5vh;
+    padding: 1vh 2vh;
+    text-align: center;
+  }
+  .theme-default .kits-window .window-header {
+    border-bottom: 1px solid #565E66;
+  }
+  .kits-window .window-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1vh;
+    overflow: hidden auto;
+  }
+  .theme-default .kits-window .window-content {
+    background-color: #0B0C0D;
+  }
+  .kits-window .window-content .ui-select-tag {
+    min-width: 13vw;
+  }
+  .kits-window .window-content .disabled .input-save-button {
+    width: 10vh;
+  }
+  .theme-default .kits-window .window-content .disabled .input-save-button {
+    color: #FFFFFF;
+    border: 1px solid #565E66;
+    background-color: rgb(19, 21, 23);
+  }
+  .kits-window .window-content .available .input-save-button {
+    width: 10vh;
+  }
+  .theme-default .kits-window .window-content .available .input-save-button {
+    color: #FFFFFF;
+    border: 1px solid #565E66;
+    background-color: #F31439;
+  }
+  .kits-window .window-content .game-option-item:first-child {
+    padding-bottom: 1vh;
+  }
+  

@@ -1,0 +1,35 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Sensitive Configuration
+**/config/*.secret
+**/config/*.key
+
+# Discord Tokens
+*discord_token*
+*bot_token*
+
+# API Keys
+*api_key*
+*api_secret*
+
+# Logs
+*.log
+logs/
+
+# Temporary Files
+*.tmp
+*.temp
+*.cache
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini

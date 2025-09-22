@@ -1,0 +1,197 @@
+/* Kits modal styles */
+.kits-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+.kits-modal {
+    width: 70vw;
+    max-width: 1100px;
+    max-height: 80vh;
+    background: linear-gradient(135deg, rgba(16,16,18,0.95), rgba(28,28,32,0.95));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0; /* allow inner scroll areas */
+}
+
+.kits-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: linear-gradient(90deg, #F31439 0%, #d10e2e 100%);
+}
+
+.kits-title {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.kits-close {
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.kits-grid {
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    overflow: auto;
+    min-height: 0; /* allow children to scroll */
+}
+
+.kit-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 220px; /* same height for all kit cards */
+    min-height: 0; /* allow inner .kit-items to scroll */
+    overflow: hidden; /* ensure inner scrollbar is visible and content clipped */
+    position: relative;
+}
+
+.kit-card.locked {
+    opacity: 0.65;
+}
+
+.kit-title {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.kit-title .kit-icon {
+    margin-right: 8px;
+    color: #F31439;
+}
+
+.kit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1; /* take available space so the button aligns bottom */
+    overflow-y: scroll; /* force scrollbar visibility */
+    position: relative;
+    /* Native scrollbar styling */
+    scrollbar-width: auto; /* Firefox: thicker, always visible */
+    scrollbar-color: #F31439 rgba(255,255,255,0.06); /* Firefox: thumb | track */
+    padding-right: 6px; /* prevent text under scrollbar */
+}
+
+/* Optional: subtle scrollbar styling */
+.kit-items::-webkit-scrollbar { /* WebKit */
+    width: 12px; /* vertical red bar on right */
+}
+.kit-items::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+}
+.kit-items::-webkit-scrollbar-thumb {
+    background: #F31439; /* solid red */
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.25); /* add separation to the right */
+}
+.kit-items::-webkit-scrollbar-thumb:hover {
+    background: #ff3558; /* brighter red on hover */
+}
+
+/* If we want to guarantee scrollbar visibility on specific kits */
+.kit-items.force-scroll {
+    overflow-y: scroll !important;
+}
+
+/* Custom vertical scroll indicator on the right of the card */
+.scroll-indicator {
+    position: absolute;
+    top: 44px; /* slightly higher */
+    right: 6px;
+    width: 4px;
+    bottom: 56px; /* keep clear of the action button */
+    background: rgba(255,255,255,0.06);
+    border-radius: 999px;
+    pointer-events: none;
+}
+.scroll-indicator .scroll-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 24px;
+    background: #F31439;
+    border-radius: 999px;
+    box-shadow: 0 0 6px rgba(243,20,57,0.5);
+}
+
+.kit-action {
+    margin-top: auto; /* pin action button to the bottom for consistent layout */
+}
+
+/* Badge for recurring kits */
+.kit-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: linear-gradient(90deg, #F31439, #ff3558);
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+
+.kit-item {
+    color: #cbd5e1;
+    font-size: 12px;
+}
+
+/* Rarity colors */
+.kit-item.rar-epic {
+    color: #a855f7; /* purple */
+}
+.kit-item.rar-legendary {
+    color: #facc15; /* gold */
+    text-shadow: 0 0 4px rgba(250, 204, 21, 0.35);
+}
+
+.kit-action {
+    margin-top: 6px;
+    background: #F31439;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.kit-card.cooldown .kit-action,
+.kit-card.locked .kit-action {
+    background: #3f3f46;
+    cursor: not-allowed;
+}
+
+

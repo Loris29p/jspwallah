@@ -1,0 +1,420 @@
+
+@import url('https://fonts.googleapis.com/css?family=Exo&display=swap');
+.shop-section {
+    padding: 2vh;
+    color: #FFFFFF;
+    width: 100%;
+    /* font-family: 'Montserrat', Helvetica, Arial, serif; */
+    font-family: 'Exo', sans-serif;
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+
+.shop-title {
+    font-size: 1.8vh;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.shop-tokens {
+    font-size: 1.4vh;
+    color: #FFFFFF;
+    padding: 0.8vh 1.5vh;
+    background: #16181A;
+    border: 1px solid #2B2F33;
+}
+
+/* Search bar */
+.shop-search {
+    margin-bottom: 2vh;
+    width: 100%;
+    position: relative;
+}
+
+.shop-search input {
+    width: 100%;
+    padding: 1vh 1.5vh;
+    background: #16181A;
+    border: 1px solid #2B2F33;
+    color: #FFFFFF;
+    /* font-family: 'Montserrat', Helvetica, Arial, serif; */
+    font-family: 'Exo', sans-serif;
+    font-size: 1.2vh;
+}
+
+.shop-search input:focus {
+    outline: none;
+    border-color: #F31439;
+}
+
+.shop-search input::placeholder {
+    color: #565E66;
+}
+
+.shop-controls {
+    display: flex;
+    gap: 1vh;
+    margin-bottom: 2vh;
+}
+
+.shop-filter-button {
+    padding: 0.8vh 1.5vh;
+    background: #16181A;
+    border: 1px solid #2B2F33;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1.2vh;
+    /* font-family: 'Montserrat', Helvetica, Arial, serif; */
+    font-family: 'Exo', sans-serif;
+}
+
+.shop-filter-button:hover {
+    background: #1e2124;
+}
+
+.shop-filter-button.active {
+    background: #F31439;
+    border-color: #F31439;
+}
+
+.sell-all-button {
+    padding: 0.8vh 1.5vh;
+    background: #F31439;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: auto;
+    font-size: 1.2vh;
+    /* font-family: 'Montserrat', Helvetica, Arial, serif; */
+    font-family: 'Exo', sans-serif;
+}
+
+.sell-all-button:hover {
+    opacity: 0.9;
+}
+
+.shop-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
+    gap: 1vh;
+    padding: 1vh;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.shop-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: #16181A;
+    border: 1px solid #2B2F33;
+    height: 23vh;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.shop-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+.shop-item-image {
+    width: 80%;
+    height: 70%;
+    object-fit: contain;
+    padding: 1vh;
+    pointer-events: none;
+}
+
+.shop-item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0.5vh 1vh;
+}
+
+.shop-item-name {
+    font-size: 1.35vh;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: #FFFFFF;
+}
+
+.shop-item-price {
+    width: 100%;
+    padding: 0.6vh 0;
+    background-color: #F31439;
+    color: #FFFFFF;
+    font-size: 1.35vh;
+    font-weight: 600;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Scrollbar Styling */
+.shop-items-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.shop-items-grid::-webkit-scrollbar-track {
+    background: #16181A;
+}
+
+.shop-items-grid::-webkit-scrollbar-thumb {
+    background: #F31439;
+}
+
+.shop-items-grid::-webkit-scrollbar-thumb:hover {
+    background: #d11232;
+}
+
+/* Enable scrolling for other containers */
+.leaderboard-section {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.inventory, .inventory-safe {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Shop Container */
+.ui-shop {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.items-shop {
+    background: rgba(17, 17, 17, 0.85);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Shop Header */
+.ui-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(243, 20, 57, 0.5);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #F31439;
+    font-weight: 500;
+}
+
+/* Filter Buttons */
+.header-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ui-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ui-button:hover {
+    background: rgba(243, 20, 57, 0.2);
+    transform: translateY(-2px);
+}
+
+.ui-button.primary {
+    background: #F31439;
+    box-shadow: 0 0 15px rgba(243, 20, 57, 0.3);
+}
+
+.ui-button.primary:hover {
+    background: #ff1745;
+    box-shadow: 0 0 20px rgba(243, 20, 57, 0.4);
+}
+
+/* Shop Items Grid */
+.content-shop-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+/* Individual Item Card */
+.item-shop {
+    background: rgb(0 0 0 / 60%);
+    /* border-radius: 8px; */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.item-shop:hover {
+    transform: translateY(-5px);
+    border-color: rgba(243, 20, 57, 0.5);
+    box-shadow: 0 5px 15px rgba(243, 20, 57, 0.2);
+}
+
+.item-shop:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(243, 20, 57, 0.1), transparent);
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Item Image Container */
+.icon-container {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.icon {
+    width: 150%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.item-shop:hover .icon {
+    transform: scale(1.1);
+}
+
+/* Item Data */
+.item-data {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Price Container */
+.price-container {
+    background: rgba(243, 20, 57, 0.1);
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: auto;
+}
+
+.price {
+    color: #F31439;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.price::after {
+    content: ' TOKENS';
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Scrollbar Styling */
+.content-shop-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-shop-items::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.content-shop-items::-webkit-scrollbar-thumb {
+    background: #F31439;
+    border-radius: 4px;
+}
+
+.content-shop-items::-webkit-scrollbar-thumb:hover {
+    background: #ff1745;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .content-shop-items {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .content-shop-items {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .icon-container {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .name {
+        font-size: 14px;
+    }
+}

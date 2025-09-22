@@ -1,0 +1,91 @@
+.mini-leaderboard {
+    font-family: 'Exo', sans-serif;
+    position: absolute;
+    left: 3vw;
+    top: 12vh;
+    margin-right: 2vw;
+    margin-bottom: 5vh;
+    color: white;
+    z-index: 1000;
+}
+
+
+.guild-container {
+    font-family: 'Exo', sans-serif;
+    margin-top: 0.4vh;
+    width: 16vw;
+    height: 3vh;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.85));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2vw;
+    font-size: 1.3vh;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+
+.guild-name {
+    margin: 0;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 3vh;
+    padding-right: 1.0vw;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.kills-count {
+    margin: 0;
+    line-height: 3vh;
+    flex-shrink: 0;
+    padding-left: 2.0vw;
+    color: #ffd700;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Effet hover pour les conteneurs */
+.guild-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .mini-leaderboard {
+        left: 2vw;
+        top: 14vh;
+        margin-right: 1vw;
+    }
+    .guild-container {
+        width: 20vw;
+        height: 3.5vh;
+        font-size: 1.4vh;
+    }
+}

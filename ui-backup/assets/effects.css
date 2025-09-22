@@ -1,0 +1,123 @@
+/* Effects HUD Styles */
+.effects-hud {
+    position: fixed;
+    bottom: 120px;
+    right: 150px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.effect-item {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.effect-item.active {
+    display: flex;
+}
+
+.effect-progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.effect-progress svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.effect-progress .progress-circle {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.effect-progress .progress-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 4;
+}
+
+.combatmode .progress-circle {
+    stroke: #ff4444;
+    filter: drop-shadow(0px 0px 4px #ff4444);
+}
+
+.storevehicle .progress-circle {
+    stroke: #44ff44;
+    filter: drop-shadow(0px 0px 4px #44ff44);
+}
+
+.effect-icon {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    fill: white;
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.8));
+}
+
+.effect-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.combatmode .effect-icon {
+    color: #ff4444;
+    fill: #ff4444;
+}
+
+.storevehicle .effect-icon {
+    color: #44ff44;
+    fill: #44ff44;
+}
+
+/* Responsive design for effects HUD */
+@media screen and (max-width: 1200px) {
+    .effects-hud {
+        bottom: 100px;
+        right: 120px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .effects-hud {
+        bottom: 80px;
+        right: 90px;
+        transform: scale(0.9);
+    }
+    
+    .effect-item {
+        width: 54px;
+        height: 54px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .effects-hud {
+        bottom: 60px;
+        right: 60px;
+        transform: scale(0.8);
+    }
+    
+    .effect-item {
+        width: 48px;
+        height: 48px;
+    }
+} 

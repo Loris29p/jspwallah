@@ -1,0 +1,25 @@
+MilitaryZoneConfig = {
+    cases = {
+        [1] = vector4(-2131.949, 3261.478, 32.81026, 148.0371),
+        [2] = vector4(-2022.927, 3158.294, 32.81031, 150.3634),
+        [3] = vector4(-1823.537, 2972.686, 32.80996, 57.41571),
+        [4] = vector4(-2265.3391, 3223.1709, 32.8102, 233.9427),
+        [5] = vector4(-2114.2654, 2838.5833, 32.80299, 19.9836),
+    },
+    listItems = {
+        "weapon_bullpuprifle",
+        "weapon_bullpuprifle_mk2",
+        "weapon_specialcarbine",
+        "weapon_specialcarbine_mk2",
+        "weapon_smg",
+        "weapon_assaultrifle_mk2",
+        "weapon_carbinerifle_mk2",
+        "weapon_carbinerifle",
+        "revolter",
+        "brioso",
+        "kuruma",
+        "buffalo4",
+        "deathbike",
+    },
+    time = 300,
+}

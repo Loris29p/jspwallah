@@ -1,0 +1,487 @@
+/* Tebex Page Styles */
+@import url('https://fonts.googleapis.com/css?family=Exo&display=swap');
+.ui-tebex {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    color: #FFFFFF;
+    /* font-family: 'Montserrat', Helvetica, Arial, serif; */
+    font-family: 'Exo', sans-serif;
+}
+
+/* Notification Banner */
+.tebex-notification {
+    background: linear-gradient(135deg, #D4AF37, #F4E4BC);
+    color: #2C1810;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Tebex Container */
+.tebex-container {
+    background: rgba(17, 17, 17, 0.85);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.tebex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(243, 20, 57, 0.5);
+}
+
+.tebex-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tebex-coins {
+    font-size: 18px;
+    color: #F31439;
+    font-weight: 500;
+    padding: 8px 15px;
+    background: rgba(243, 20, 57, 0.1);
+    border-radius: 6px;
+}
+
+/* Category Buttons */
+.tebex-categories {
+    display: flex;
+    gap: 12px;
+    margin-bottom: calc(0.092592592vh * 20);
+}
+
+.tebex-category-btn {
+    padding: calc(0.092592592vh * 12) calc(0.092592592vh * 24);
+    font-size: calc(0.092592592vh * 14);
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: calc(0.092592592vh * 6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: calc(0.092592592vh * 10);
+}
+
+.tebex-category-btn:hover {
+    background: rgba(243, 20, 57, 0.2);
+    transform: translateY(-2px);
+}
+
+.tebex-category-btn.active {
+    background: #F31439;
+    box-shadow: 0 0 15px rgba(243, 20, 57, 0.3);
+}
+
+.tebex-category-btn.disabled {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+/* Content Area */
+.tebex-content {
+    min-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Rank Cards */
+.rank-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.rank-card {
+    background: rgb(0 0 0 / 60%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.rank-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(243, 20, 57, 0.5);
+    box-shadow: 0 5px 15px rgba(243, 20, 57, 0.2);
+}
+
+.rank-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rank-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.rank-description {
+    font-size: 14px;
+    color: #cccccc;
+    opacity: 0.8;
+}
+
+.rank-advantages {
+    margin-bottom: 20px;
+}
+
+.advantages-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #F31439;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.advantages-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.advantage-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.advantage-icon {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+.advantage-item.included .advantage-icon {
+    color: #4CAF50;
+}
+
+.advantage-item.not-included .advantage-icon {
+    color: #F44336;
+}
+
+.advantage-item.not-included .advantage-description {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+.advantage-item.with-value {
+    justify-content: space-between;
+}
+
+.advantage-value {
+    color: #F31439;
+    font-weight: 600;
+}
+
+.rank-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #F31439;
+}
+
+.shop-buy-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #F31439;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.shop-buy-button:hover {
+    background: #ff1745;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(243, 20, 57, 0.4);
+}
+
+/* Others Categories */
+.others-categories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.others-box {
+    background: rgb(0 0 0 / 60%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.others-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(243, 20, 57, 0.5);
+    box-shadow: 0 5px 15px rgba(243, 20, 57, 0.2);
+}
+
+.others-box-content {
+    flex-grow: 1;
+}
+
+.others-box-header {
+    margin-bottom: 15px;
+}
+
+.others-box-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.others-box-category {
+    font-size: 12px;
+    color: #F31439;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.others-box-description {
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.others-box-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.others-box-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #F31439;
+}
+
+/* Scrollbar Styling */
+.tebex-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tebex-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.tebex-content::-webkit-scrollbar-thumb {
+    background: #F31439;
+    border-radius: 4px;
+}
+
+.tebex-content::-webkit-scrollbar-thumb:hover {
+    background: #ff1745;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .rank-cards-container,
+    .others-categories-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .tebex-categories {
+        flex-direction: column;
+    }
+    
+    .rank-cards-container,
+    .others-categories-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .tebex-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Token Cards Styles */
+.token-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.token-card {
+    background: rgba(17, 17, 17, 0.95);
+    border-radius: 8px;
+    padding: 15px;
+    transition: transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
+}
+
+.token-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(243, 20, 57, 0.3);
+}
+
+.token-card-header {
+    margin-bottom: 15px;
+}
+
+.token-amount {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2em;
+    color: #F31439;
+    font-weight: 600;
+}
+
+.token-amount i {
+    font-size: 1.1em;
+}
+
+.token-card-content {
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-grow: 1;
+}
+
+.token-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.token-rate, .token-bonus {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rate-label, .bonus-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9em;
+}
+
+.rate-value, .bonus-value {
+    color: #F31439;
+    font-weight: 500;
+}
+
+.token-card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.token-price {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #F31439;
+    text-align: center;
+}
+
+.token-buy-button {
+    background: #F31439;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.token-buy-button:hover {
+    background: #ff1745;
+}
+
+.token-buy-button i {
+    font-size: 1em;
+}
+
+/* Bonus value */
+.bonus-value {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(243, 20, 57, 0.1);
+    color: #F31439;
+}
+
+/* Scrollbar styling for token cards */
+.token-cards-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.token-cards-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.token-cards-container::-webkit-scrollbar-thumb {
+    background: #F31439;
+    border-radius: 3px;
+}
+
+.token-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #ff1745;
+}

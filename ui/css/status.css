@@ -1,0 +1,889 @@
+.player-status-panel {
+    position: absolute;
+    font-family: "Purista Medium", Arial, sans-serif;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 6vh;
+    margin-right: 5vh;
+    width: 28vh;
+    z-index: 1000;
+  }
+  
+.player-status-panel .status-wrapper {
+    width: 28vh;
+  }
+  
+.player-status-panel .vitals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9vh;
+  }
+  
+.player-status-panel .vital-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+.player-status-panel .vital-row.hidden {
+    display: none;
+  }
+  
+.player-status-panel .vital-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2vh;
+    height: 1.6vh;
+    margin-right: 0.7vh;
+    background: rgba(0, 0, 0, 0.3);
+    transform: skewX(-15deg);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    border-radius: 0.2vh;
+  }
+
+.player-status-panel .vital-icon svg {
+    width: 1.1vh;
+    height: 1.1vh;
+    transform: skewX(15deg);
+  }
+
+.player-status-panel .vital-row.vitality .vital-icon {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: #ffffff;
+    color: #000000;
+  }
+
+.player-status-panel .vital-row.defense .vital-icon {
+    border-color: rgba(255, 0, 0, 0.6);
+    background: #ff0000;
+    color: #ffffff;
+    margin-left: -0.3vh;
+  }
+
+.player-status-panel .vital-row.defense .vital-icon svg path {
+    fill: #ffffff;
+  }
+
+.player-status-panel .vital-row.defense .vital-icon svg {
+    margin-top: 0.22vh;
+  }
+  
+.player-status-panel .vital-row.defense .vital-meter {
+    height: 1.6vh;
+  }
+  
+.player-status-panel .vital-row.defense .meter-background {
+    display: flex;
+    height: 1.6vh;
+    transform: skewX(-15deg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    border-radius: 0.2vh;
+    box-shadow: inset 0 0 0.6vh rgba(255,255,255,0.04), 0 0 0.6vh rgba(0,0,0,0.2);
+  }
+  
+.player-status-panel .vital-row.defense .meter-base {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+.player-status-panel .vital-row.defense .meter-fill {
+    width: 100%;
+    height: 100%;
+    background: #ff0000;
+    transition: width 0.3s ease;
+  }
+  
+.player-status-panel .vital-row.vitality .vital-meter {
+    height: 1.6vh;
+  }
+  
+.player-status-panel .vital-row.vitality .meter-background {
+    display: flex;
+    height: 1.6vh;
+    transform: skewX(-15deg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.2vh;
+    box-shadow: inset 0 0 0.6vh rgba(255,255,255,0.04), 0 0 0.6vh rgba(0,0,0,0.2);
+  }
+  
+.player-status-panel .vital-row.vitality .meter-fill {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.3s ease;
+  }
+  
+.player-status-panel .vital-row.vitality .vital-meter .meter-background .meter-fill.low-warning {
+    animation: low-warning 2.5s infinite;
+  }
+  
+.player-status-panel .vital-row .vital-meter {
+    width: 100%;
+    height: 100%;
+  }
+  
+.player-status-panel .vital-row .meter-background {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  
+.player-status-panel .vital-row .meter-background .meter-fill {
+    width: 0%;
+    transition: width 0.3s ease;
+    will-change: width;
+  }
+  
+@keyframes low-warning {
+    0% {
+      background: #ffffff;
+    }
+    50% {
+      background: #cccccc;
+    }
+    100% {
+      background: #ffffff;
+    }
+  }
+
+/* Effects Container */
+.extra-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 6vh;
+    margin-right: 35vh; /* Positioned to the left of the status panel */
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    z-index: 1000;
+    font-family: "Purista Medium", Arial, sans-serif;
+}
+
+/* Individual Effect */
+.effect {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5vh;
+    padding: 0.8vh 1.2vh;s
+    min-width: 25vh;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.effect:hover {
+    transform: translateX(-0.2vh);
+    box-shadow: 0 0.6vh 1.6vh rgba(0, 0, 0, 0.4);
+}
+
+/* Effect Icon */
+.effect-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3vh;
+    height: 3vh;
+    margin-right: 1vh;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.effect-icon i {
+    font-size: 1.4vh;
+    color: #ffffff;
+}
+
+/* Effect-specific icon colors */
+.effect.antizin .effect-icon {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.effect.antizin .effect-icon i {
+    color: #00ff88;
+}
+
+.effect.spawncar .effect-icon {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: #ff6b35;
+}
+
+.effect.spawncar .effect-icon i {
+    color: #ff6b35;
+}
+
+.effect.babygod .effect-icon {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+}
+
+.effect.babygod .effect-icon i {
+    color: #ffd700;
+}
+
+.effect.flesh .effect-icon {
+    background: rgba(255, 20, 147, 0.2);
+    border-color: #ff1493;
+}
+
+.effect.flesh .effect-icon i {
+    color: #ff1493;
+}
+
+/* Safe Zone Special Design */
+.effect.safezone {
+    position: fixed;
+    bottom: 138px;
+    right: 120px; /* Positionné à gauche de la tête de mort */
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    width: 36px;
+    height: 36px;
+    box-shadow: none;
+}
+
+.effect.safezone:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.safezone-circle {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.safezone-icon {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.safezone-icon i {
+    font-size: 18px;
+    color: #ffffff;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.safezone-progress {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.safezone-trail {
+    stroke: #2c2c2c;
+    stroke-width: 3.5;
+    fill: none;
+}
+
+.safezone-path {
+    stroke: #ffffff;
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+}
+
+/* Combat Mode Special Design */
+.effect.combatmode {
+    position: fixed;
+    bottom: 138px;
+    right: 120px; /* Même position que le safezone */
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    width: 36px;
+    height: 36px;
+    box-shadow: none;
+    transition: right 0.3s ease;
+}
+
+/* Quand safezone est actif, décaler combatmode vers la gauche */
+.effect.safezone:not([style*="display: none"]) ~ .effect.combatmode,
+.effect.safezone[style*="display: block"] ~ .effect.combatmode {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.combatmode:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.combatmode-circle {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.combatmode-icon {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.combatmode-icon i {
+    font-size: 18px;
+    color: #ff4444;
+    text-shadow: 0 0 4px rgba(255, 68, 68, 0.8);
+}
+
+.combatmode-progress {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.combatmode-trail {
+    stroke: #2c2c2c;
+    stroke-width: 3.5;
+    fill: none;
+}
+
+.combatmode-path {
+    stroke: #ff4444;
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(255, 68, 68, 0.8));
+}
+
+/* Spawn Car Special Design */
+.effect.spawncar {
+    position: fixed;
+    bottom: 138px;
+    right: 120px; /* Même position que le safezone et combat mode */
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    width: 36px;
+    height: 36px;
+    box-shadow: none;
+    transition: right 0.3s ease;
+}
+
+/* Tracker Deluxo Special Design */
+.effect.trackerdeluxo {
+    position: fixed;
+    bottom: 138px;
+    right: 120px; /* Même position que les autres effets */
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-width: auto;
+    width: 36px;
+    height: 36px;
+    box-shadow: none;
+    transition: right 0.3s ease;
+}
+
+/* Quand safezone est actif, décaler spawncar vers la gauche */
+.effect.safezone:not([style*="display: none"]) ~ .effect.spawncar,
+.effect.safezone[style*="display: block"] ~ .effect.spawncar {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+/* Quand combatmode est actif, décaler spawncar vers la gauche */
+.effect.combatmode:not([style*="display: none"]) ~ .effect.spawncar,
+.effect.combatmode[style*="display: block"] ~ .effect.spawncar {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+/* Quand spawncar est actif, décaler les autres effets vers la gauche */
+.effect.spawncar:not([style*="display: none"]) ~ .effect.safezone,
+.effect.spawncar[style*="display: block"] ~ .effect.safezone {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.spawncar:not([style*="display: none"]) ~ .effect.combatmode,
+.effect.spawncar[style*="display: block"] ~ .effect.combatmode {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+.effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+/* Quand trackerdeluxo est actif, décaler les autres effets vers la gauche */
+.effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.safezone,
+.effect.trackerdeluxo[style*="display: block"] ~ .effect.safezone {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.combatmode,
+.effect.trackerdeluxo[style*="display: block"] ~ .effect.combatmode {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+.effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+/* Quand safezone est actif, décaler trackerdeluxo vers la gauche */
+.effect.safezone:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+.effect.safezone[style*="display: block"] ~ .effect.trackerdeluxo {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+/* Quand combatmode est actif, décaler trackerdeluxo vers la gauche */
+.effect.combatmode:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+.effect.combatmode[style*="display: block"] ~ .effect.trackerdeluxo {
+    right: 160px; /* Décalé vers la gauche */
+}
+
+.effect.spawncar:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.effect.trackerdeluxo:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.trackerdeluxo-circle {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trackerdeluxo-icon {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.trackerdeluxo-icon i {
+    font-size: 18px;
+    color: #ff4444;
+    text-shadow: 0 0 4px rgba(255, 68, 68, 0.8);
+}
+
+.trackerdeluxo-progress {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.trackerdeluxo-trail {
+    stroke: #2c2c2c;
+    stroke-width: 3.5;
+    fill: none;
+}
+
+.trackerdeluxo-path {
+    stroke: #ff4444;
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(255, 68, 68, 0.8));
+}
+
+.spawncar-circle {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spawncar-icon {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.spawncar-icon i {
+    font-size: 18px;
+    color: #ff6b35;
+    text-shadow: 0 0 4px rgba(255, 107, 53, 0.8);
+}
+
+.spawncar-progress {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.spawncar-trail {
+    stroke: #2c2c2c;
+    stroke-width: 3.5;
+    fill: none;
+}
+
+.spawncar-path {
+    stroke: #ff6b35;
+    stroke-width: 3.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    filter: drop-shadow(0 0 3px rgba(255, 107, 53, 0.8));
+}
+
+/* Responsive design for spawncar effect */
+@media screen and (max-width: 1200px) {
+    .effect.spawncar {
+        bottom: 110px;
+        right: 100px;
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.safezone[style*="display: block"] ~ .effect.spawncar,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.combatmode[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.spawncar[style*="display: block"] ~ .effect.safezone,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.spawncar[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo {
+        right: 140px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .effect.spawncar {
+        bottom: 90px;
+        right: 80px;
+        transform: scale(0.9);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.safezone[style*="display: block"] ~ .effect.spawncar,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.combatmode[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.spawncar[style*="display: block"] ~ .effect.safezone,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.spawncar[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo {
+        right: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .effect.spawncar {
+        bottom: 70px;
+        right: 60px;
+        transform: scale(0.8);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.safezone[style*="display: block"] ~ .effect.spawncar,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.combatmode[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.spawncar[style*="display: block"] ~ .effect.safezone,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.spawncar[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo {
+        right: 100px;
+    }
+}
+
+/* Responsive design for trackerdeluxo effect */
+@media screen and (max-width: 1200px) {
+    .effect.trackerdeluxo {
+        bottom: 110px;
+        right: 100px;
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.safezone[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.combatmode[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.safezone,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar {
+        right: 140px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .effect.trackerdeluxo {
+        bottom: 90px;
+        right: 80px;
+        transform: scale(0.9);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.safezone[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.combatmode[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.safezone,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar {
+        right: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .effect.trackerdeluxo {
+        bottom: 70px;
+        right: 60px;
+        transform: scale(0.8);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.safezone[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.combatmode:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.combatmode[style*="display: block"] ~ .effect.trackerdeluxo,
+    .effect.spawncar:not([style*="display: none"]) ~ .effect.trackerdeluxo,
+    .effect.spawncar[style*="display: block"] ~ .effect.spawncar,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.safezone,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.safezone,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.combatmode,
+    .effect.trackerdeluxo:not([style*="display: none"]) ~ .effect.spawncar,
+    .effect.trackerdeluxo[style*="display: block"] ~ .effect.spawncar {
+        right: 100px;
+    }
+}
+
+/* Responsive design for combatmode effect */
+@media screen and (max-width: 1200px) {
+    .effect.combatmode {
+        bottom: 110px;
+        right: 100px;
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.safezone[style*="display: block"] ~ .effect.combatmode {
+        right: 140px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .effect.combatmode {
+        bottom: 90px;
+        right: 80px;
+        transform: scale(0.9);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.safezone[style*="display: block"] ~ .effect.combatmode {
+        right: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .effect.combatmode {
+        bottom: 70px;
+        right: 60px;
+        transform: scale(0.8);
+    }
+    
+    /* Décalage responsive */
+    .effect.safezone:not([style*="display: none"]) ~ .effect.combatmode,
+    .effect.safezone[style*="display: block"] ~ .effect.combatmode {
+        right: 100px;
+    }
+}
+
+/* Responsive design for safezone effect */
+@media screen and (max-width: 1200px) {
+    .effect.safezone {
+        bottom: 110px;
+        right: 100px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .effect.safezone {
+        bottom: 90px;
+        right: 80px;
+        transform: scale(0.9);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .effect.safezone {
+        bottom: 70px;
+        right: 60px;
+        transform: scale(0.8);
+    }
+}
+
+/* Effect Info */
+.effect-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1vh;
+}
+
+.effect-name {
+    font-size: 1.1vh;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1vh;
+    margin-bottom: 0.2vh;
+}
+
+.effect-time {
+    font-size: 1.3vh;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+}
+
+/* Circular Progress Bar */
+.CircularProgressbar {
+    width: 3.5vh;
+    height: 3.5vh;
+    position: relative;
+}
+
+.CircularProgressbar-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.CircularProgressbar-trail {
+    stroke: #2c2c2c;
+    stroke-width: 4;
+    fill: none;
+}
+
+.CircularProgressbar-path {
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+/* Effect-specific progress bar colors */
+.effect.antizin .CircularProgressbar-path {
+    stroke: #00ff88;
+}
+
+.effect.spawncar .CircularProgressbar-path {
+    stroke: #ff6b35;
+}
+
+.effect.babygod .CircularProgressbar-path {
+    stroke: #ffd700;
+}
+
+.effect.safezone .CircularProgressbar-path {
+    stroke: #00bfff;
+}
+
+.effect.flesh .CircularProgressbar-path {
+    stroke: #ff1493;
+}
+
+/* Animation for active effects */
+.effect.active {
+    animation: effectPulse 2s infinite;
+}
+
+@keyframes effectPulse {
+    0% {
+        box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0.4vh 1.2vh rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1920px) {
+    .extra-container {
+        margin-right: 32vh;
+    }
+    
+    .effect {
+        min-width: 22vh;
+    }
+}
+
+@media (max-width: 1600px) {
+    .extra-container {
+        margin-right: 28vh;
+    }
+    
+    .effect {
+        min-width: 20vh;
+    }
+}

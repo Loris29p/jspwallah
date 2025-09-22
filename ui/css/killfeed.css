@@ -1,0 +1,252 @@
+/* Guild PVP Killfeed - Original CSS Implementation */
+/* Custom design with unique class names and structure */
+
+.kill-display-area {
+    position: fixed;
+    top: 8vh;
+    right: 2vh;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    pointer-events: none;
+    user-select: none;
+    font-family: 'Exo', sans-serif;
+}
+
+.kill-notification {
+    display: flex;
+    justify-content: flex-end;
+    /* Animation de glissement supprimée */
+    transition: opacity 0.3s ease;
+    margin-bottom: 1vh;
+}
+
+/* Animation de glissement supprimée */
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0;
+    padding: 0;
+    height: 3vh;
+    font-size: 1.5vh;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    border: none;
+}
+
+.attacker-text,
+.victim-text {
+    padding: 1vh;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    font-family: 'Exo', sans-serif;
+    font-weight: 600;
+}
+
+.attacker-text {
+    padding-right: 0.4vh;
+}
+
+.victim-text {
+    padding-left: 0.4vh;
+}
+
+.weapon-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.4vh;
+    height: 3.5vh;
+    width: auto;
+}
+
+.weapon-image {
+    width: 5.4vh;
+    height: 3.5vh;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* White weapons */
+}
+
+.prestige-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2vh;
+    height: 2vh;
+}
+
+.prestige-badge.attacker-badge {
+    margin-right: -0.3vh;
+    margin-left: 0.5vh;
+}
+
+.prestige-badge.victim-badge {
+    margin-left: -0.3vh;
+    margin-right: 0.5vh;
+}
+
+.prestige-badge img {
+    width: 2vh;
+    height: 2vh;
+    object-fit: contain;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1200px) {
+    .kill-display-area {
+        top: 6vh;
+        right: 1.5vh;
+        gap: 1.8vh;
+    }
+    
+    .kill-notification {
+        margin-bottom: 0.8vh;
+    }
+    
+    .notification-content {
+        height: 2.8vh;
+        font-size: 1.4vh;
+    }
+    
+    .weapon-display {
+        height: 3.2vh;
+    }
+    
+    .weapon-image {
+        width: 5vh;
+        height: 3.2vh;
+    }
+    
+    .prestige-badge {
+        width: 1.8vh;
+        height: 1.8vh;
+    }
+    
+    .prestige-badge img {
+        width: 1.8vh;
+        height: 1.8vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .kill-display-area {
+        top: 4vh;
+        right: 1vh;
+        gap: 1.5vh;
+    }
+    
+    .kill-notification {
+        margin-bottom: 0.6vh;
+    }
+    
+    .notification-content {
+        height: 2.5vh;
+        font-size: 1.3vh;
+    }
+    
+    .weapon-display {
+        height: 3vh;
+        padding: 0 0.3vh;
+    }
+    
+    .weapon-image {
+        width: 4.5vh;
+        height: 3vh;
+    }
+    
+    .attacker-text,
+    .victim-text {
+        padding: 0.8vh;
+    }
+    
+    .attacker-text {
+        padding-right: 0.3vh;
+    }
+    
+    .victim-text {
+        padding-left: 0.3vh;
+    }
+    
+    .prestige-badge {
+        width: 1.6vh;
+        height: 1.6vh;
+    }
+    
+    .prestige-badge img {
+        width: 1.6vh;
+        height: 1.6vh;
+    }
+    
+    .prestige-badge.attacker-badge {
+        margin-right: -0.2vh;
+        margin-left: 0.4vh;
+    }
+    
+    .prestige-badge.victim-badge {
+        margin-left: -0.2vh;
+        margin-right: 0.4vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .kill-display-area {
+        top: 3vh;
+        right: 0.5vh;
+        gap: 1.2vh;
+    }
+    
+    .kill-notification {
+        margin-bottom: 0.5vh;
+    }
+    
+    .notification-content {
+        height: 2.2vh;
+        font-size: 1.2vh;
+    }
+    
+    .weapon-display {
+        height: 2.7vh;
+        padding: 0 0.2vh;
+    }
+    
+    .weapon-image {
+        width: 4vh;
+        height: 2.7vh;
+    }
+    
+    .attacker-text,
+    .victim-text {
+        padding: 0.6vh;
+    }
+    
+    .attacker-text {
+        padding-right: 0.2vh;
+    }
+    
+    .victim-text {
+        padding-left: 0.2vh;
+    }
+    
+    .prestige-badge {
+        width: 1.4vh;
+        height: 1.4vh;
+    }
+    
+    .prestige-badge img {
+        width: 1.4vh;
+        height: 1.4vh;
+    }
+    
+    .prestige-badge.attacker-badge {
+        margin-right: -0.1vh;
+        margin-left: 0.3vh;
+    }
+    
+    .prestige-badge.victim-badge {
+        margin-left: -0.1vh;
+        margin-right: 0.3vh;
+    }
+}

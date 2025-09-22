@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Exo&display=swap');
+.progress-container {
+    position: fixed;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30vh;
+    height: 3vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .progress-container.health {
+    border: 2px solid rgba(0, 255, 0, 0.7);
+  }
+  
+  .progress-container.armor {
+    border: 2px solid rgba(255, 0, 0, 0.7);
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+  
+  .progress-container.health .progress-bar {
+    background-color: rgba(0, 255, 0, 0.7);
+  }
+  
+  .progress-container.armor .progress-bar {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+  
+  .progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Exo', sans-serif;
+    font-size: 1.4vh;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+  }
+  
+  .progress-cancel-hint {
+    position: absolute;
+    bottom: -2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: 'Exo', sans-serif;
+    font-size: 1vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.2vh 0.6vh;
+    border-radius: 2px;
+    white-space: nowrap;
+  }

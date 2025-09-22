@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GUILD INV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/inventory.css">
+    <link rel="stylesheet" href="./css/shop.css">
+    <link rel="stylesheet" href="./css/leaderboard.css">
+    <link rel="stylesheet" href="./css/tebex.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/health.css">
+    <link rel="stylesheet" href="./css/killhud.css">
+    <link rel="stylesheet" href="./css/killfeed.css">
+    <link rel="stylesheet" href="./css/redzone.css">
+    <link rel="stylesheet" href="./css/killcam.css">
+    <link rel="stylesheet" href="./css/league.css">
+    <link rel="stylesheet" href="./css/gift.css">
+    <link rel="stylesheet" href="./css/settings.css">
+    <link rel="stylesheet" href="./css/crew.css">
+    <link rel="stylesheet" href="./css/host.css">
+    <link rel="stylesheet" href="./css/status.css">
+    <link rel="stylesheet" href="./css/mini-leaderboard.css">
+    <link rel="stylesheet" href="./css/badge.css">
+    <link rel="stylesheet" href="./css/tebex-site.css">
+    <link rel="stylesheet" href="./css/kit.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="./js/inventory.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="./js/profile.js"></script>
+    <script src="./js/tebex.js"></script>
+    <script src="./js/shop.js"></script>
+    <script src="./js/health.js"></script>
+    <script src="./js/killhud.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/killfeed.js"></script>
+    <script src="./js/redzone.js"></script>
+    <script src="./js/killcam.js"></script>
+    <script src="./js/league.js"></script>
+    <script src="./js/gift.js"></script>
+    <script src="./js/crew.js"></script>
+    <script src="./js/host.js"></script>
+    <script src="./js/status.js"></script>
+    <script src="./js/mini-leaderboard.js"></script>
+    <script src="./js/badge.js"></script>
+    <script src="./js/play_music.js"></script>
+    <script src="./js/tebex-site.js"></script>
+    <script src="./js/kit.js"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-duotone-thin.css">
+    <style>
+        .loader-main {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .header-text {
+            font-family: Bai Jamjuree, sans-serif;
+            font-weight: 900;
+            font-size: 2vw;
+            color: white;
+            text-align: center;
+        }
+
+        /* Nouveau logo de chargement */
+        .loading-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-main-contain {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 60vh;
+            height: 60vh;
+        }
+
+        .loader-main-contain img {
+            position: absolute;
+            animation: c5 infinite 2s;
+            width: 80vh;
+        }
+
+        .loader-main-contain img:nth-child(1) {
+            animation: c1 infinite 2s;
+            width: 20vh;
+        }
+        .loader-main-contain img:nth-child(2) {
+            animation: c2 infinite 2s;
+            width: 40vh;
+        }
+        .loader-main-contain img:nth-child(3) {
+            animation: c3 infinite 2s;
+            width: 50vh;
+        }
+        .loader-main-contain img:nth-child(4) {
+            animation: c4 infinite 2s;
+            width: 60vh;
+        }
+        .loader-main-contain img:nth-child(5) {
+            animation: c5 infinite 2s;
+            width: 70vh;
+        }
+
+
+        @keyframes c1 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(45deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes c2 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(-45deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes c3 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(45deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes c4 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(-45deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes c5 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(45deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modern Header Navigation -->
+
+
+    <div class="loader-main">
+        <div class="loader-main-contain">
+            <div class="loading-logo">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading checking your files. Please wait...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('message', function (event) {
+            if (event.data.type === 'magicTestStart') {
+                document.querySelector('.loader-main').style.display = 'flex';
+            } else if (event.data.type === 'magicTestEnd') {
+                document.querySelector('.loader-main').style.display = 'none';
+            }
+        });
+    </script>
+
+    <div class="tebex-site-container">
+		<div class="web-header">
+			<button class="browser-button back-button" onclick="history.back()"></button>
+			<button class="browser-button next-button" onclick="history.forward()"></button>
+			<input id="urlEntry" class="input-search" value="www.store.guildpvp.fr" type="text" readonly="true">
+		</div>
+		<div class="web-container">
+			<div class="web-site">
+                <iframe src="https://store.guildpvp.fr/" 
+                width="100%" 
+                height="800" 
+                style="border: none;"></iframe>
+			</div>
+		</div>
+	</div>
+
+    <div class="badge-container">
+
+    </div>
+
+    
+    <div class="ui-body">
+        <header class="main-header">
+            <div class="navigation-wrapper">
+                <!-- Centered Navigation -->
+                <nav class="container-principale">
+                    <button class="gift-button" id="giftButton" onclick="openGiftBox(event)">
+                        <i class="fa-duotone fa-solid fa-gift"></i>
+                        <span>GIFT</span>
+                    </button>
+                    <a href="#" class="menu-link current-page"><i class="fa-solid fa-box"></i>INVENTORY</a>
+                    <a href="#" class="menu-link"><i class="fa-solid fa-ranking-star"></i>LEADERBOARD</a>
+                    <a href="#" class="menu-link" onclick="OpenShop()"><i class="fa-solid fa-store"></i>SHOP</a>
+                    <a href="#" class="menu-link"><i class="fa-solid fa-cart-shopping"></i>TEBEX</a>
+                    <a href="#" class="menu-link"><i class="fa-solid fa-user"></i>PROFIL</a>
+                    <a href="#" class="menu-link"><i class="fa-solid fa-people-group"></i>CREW</a>
+                    <a href="#" class="menu-link settings-button">
+                        <i class="fas fa-cog"></i>
+                        SETTINGS
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="crew-big-container">
+            <div class="crew-container">
+                <!-- Header -->
+                <div class="crew-header">
+                    <div class="crew-header-left">
+                        <div class="crew-title" id="crew-title"></div>
+                        <div class="crew-tag" id="crew-tag" style="display: none;"></div>
+                        <div class="crew-content-members-count" id="crew-content-members-count">
+                            <i class="fa-duotone fa-solid fa-users"></i>
+                            <span id="crew-members-count">0</span>
+                        </div>
+                    </div>
+                    <button class="tebex-category-btn active crew-leave-btn" id="crew-leave-btn" style="display: none;"><i class="fa-duotone fa-solid fa-right-from-bracket" onclick="leaveCrew()"></i> LEAVE</button>
+                </div>
+
+                <div class="crew-content" style="display: none;">
+                    <div class="crew-description-container" id="crew-description-container" style="display: none;">
+                        <div class="crew-description-label">DESCRIPTION</div>
+                        <div class="crew-description-text" id="crew-description-text"></div>
+                    </div>
+
+                    <div class="tebex-categories">
+                        <button class="tebex-category-btn active" id="announcement-btn" onclick="openAnnouncementPopup()"><i class="fa-duotone fa-solid fa-megaphone"></i> Announcement</button>
+                        <button class="tebex-category-btn active" id="invite-btn" onclick="InviteToCrew()"><i class="fa-duotone fa-solid fa-user-plus"></i> Invite</button>
+                        <button class="tebex-category-btn active" id="editCrewInfo-btn" onclick="editCrewInfo()"><i class="fa-duotone fa-solid fa-pen-to-square"></i> Edit Info</button>
+                    </div>
+
+                    <div class="crew-content-stats">
+                        <div class="crew-content-stats-item">
+                            <i class="fa-duotone fa-solid fa-skull"></i>
+                            <div class="crew-content-stats-item-texts">
+                                <span class="crew-content-stats-item-texts-title">Total Kills</span>
+                                <span class="crew-content-stats-item-texts-value" id="crew-kills-count">0</span>
+                            </div>
+                        </div>
+                        <div class="crew-content-stats-item">
+                            <i class="fa-duotone fa-solid fa-user-cowboy"></i>
+                            <div class="crew-content-stats-item-texts">
+                                <span class="crew-content-stats-item-texts-title">Redzone Kills</span>
+                                <span class="crew-content-stats-item-texts-value" id="crew-killsredzone-count">0</span>
+                            </div>
+                        </div>
+                        <div class="crew-content-stats-item">
+                            <i class="fa-duotone fa-solid fa-plane-prop"></i>
+                            <div class="crew-content-stats-item-texts">
+                                <span class="crew-content-stats-item-texts-title">AIRDROPS</span>
+                                <span class="crew-content-stats-item-texts-value" id="crew-airdrops-count">0</span>
+                            </div>
+                        </div>
+                        <div class="crew-content-stats-item">
+                            <i class="fa-duotone fa-solid fa-trophy-star"></i>
+                            <div class="crew-content-stats-item-texts">
+                                <span class="crew-content-stats-item-texts-title">Cup Wins</span>
+                                <span class="crew-content-stats-item-texts-value" id="crew-cupwins-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="crew-content-members">
+                        <div class="crew-content-members-title">MEMBERS</div>
+                        <div class="crew-members-table-container">
+                            <table class="crew-members-table">
+                                <thead>
+                                    <tr>
+                                        <th>RANK</th>
+                                        <th>NICKNAME</th>
+                                        <th>KILLS</th>
+                                        <th>KILLS REDZONE</th>
+                                        <th>AIRDROP TAKEN</th>
+                                        <th>STATUS</th>
+                                        <th>LAST ACTIVITY</th>
+                                        <th>ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="crew-members-tbody">
+                                    <tr>
+                                        <td>
+                                            <span class="member-rank leader">LEADER</span>
+                                        </td>
+                                        <td class="member-nickname">Loris29p</td>
+                                        <td>
+                                            <span class="member-status online">Online</span>
+                                        </td>
+                                        <td class="member-activity">Unknown Date</td>
+                                        <td>
+                                            <button class="member-action-btn">ACTIONS</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="crew-content-doesnt-have-crew" style="display: none;">
+                    <div class="crew-content-doesnt-have-crew-title">You don't have a crew</div>
+                    <button class="crew-content-doesnt-have-crew-btn active big" onclick="CreateCrew()">CREATE CREW</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="leaderboard-section">
+            <div class="leaderboard-header">
+                <h2 class="leaderboard-title">Leaderboard</h2>
+                <div class="leaderboard-tabs">
+                    <button class="tab-button active" data-type="kills">Kills</button>
+                    <button class="tab-button" data-type="deaths">Deaths</button>
+                    <button class="tab-button" data-type="tokens">Tokens</button>
+                    <button class="tab-button" data-type="crew">Crew</button>
+                </div>
+            </div>
+
+            <div class="top-players">
+                <!-- Top players will be dynamically populated -->
+            </div>
+
+            <div class="leaderboard-table-container">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>Kills</th>
+                            <th>Deaths</th>
+                            <th>Tokens</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table content will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tebex Shop Section -->
+        <div class="ui-tebex">
+            <!-- Notification Banner -->
+            <div class="tebex-notification">
+                To retrieve your tokens or coins go to: /redeem_tebex tbx-id
+            </div>
+
+            <!-- Tebex Container -->
+            <div class="tebex-container">
+                <!-- Header -->
+                <div class="tebex-header">
+                    <div class="tebex-title">Tebex Store</div>
+                    <div class="tebex-coins">0 Coins</div>
+                </div>
+
+                <!-- Category Buttons -->
+                <div class="tebex-categories">
+                    <button class="tebex-category-btn active" data-category="rank">Rank</button>
+                    <button class="tebex-category-btn" data-category="other">Other</button>
+                    <button class="tebex-category-btn" data-category="token">Token</button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="tebex-content">
+                    <!-- Content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-item-container">
+
+        </div>
+        <!-- Main Inventory Content -->
+        <div class="container inventorydiv" id="inventorydiv">
+            <!-- My Bag Section -->
+            <li class="section-title">MY BAG</li>
+            <div id="inventory" class="inventory cards items-grid my-bag-grid">
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Pistol" class="item-image">
+                    <span class="item-quantity">x2</span>
+                    <span class="item-name">Pistol</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_assaultrifle.png" alt="Assault Rifle" class="item-image">
+                    <span class="item-quantity">x1</span>
+                    <span class="item-name">Assault Rifle</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/parachute.png" alt="Body Armor" class="item-image">
+                    <span class="item-quantity">x3</span>
+                    <span class="item-name">Body Armor</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Medical Kit" class="item-image">
+                    <span class="item-quantity">x1</span>
+                    <span class="item-name">Medical Kit</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Rifle Ammo" class="item-image">
+                    <span class="item-quantity">x1</span>
+                    <span class="item-name">Rifle Ammo</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Energy Drink" class="item-image">
+                    <span class="item-quantity">x1</span>
+                    <span class="item-name">Energy Drink</span>
+                </div>
+            </div>
+
+            <!-- Protected Container Section -->
+            <li class="section-title">PROTECTED CONTAINER</li>
+            <div id="inventory-safe" class="inventory-safe cards items-grid protected-container-grid">
+                <div class="item-slot">
+                    <img src="assets/items/weapon_heavysniper.png" alt="Heavy Sniper" class="item-image">
+                    <span class="item-name">Heavy Sniper</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_combatmg_mk2.png" alt="Combat MG" class="item-image">
+                    <span class="item-name">Combat MG</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Gold Case" class="item-image">
+                    <span class="item-name">Gold Case</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Zentorno" class="item-image">
+                    <span class="item-name">Zentorno</span>
+                </div>
+                <div class="item-slot">
+                    <img src="assets/items/weapon_pistol.png" alt="Pistol Ammo" class="item-image">
+                    <span class="item-name">Pistol Ammo</span>
+                </div>
+            </div>
+
+            <!-- Shortcut Section -->
+            <div class="player-inventory-shortcut cards">
+                <li class="section-title">SHORTCUT</li>
+                <div class="shortcut-grid items-grid disablepointer">
+                    <div id="slot-0" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 1</span> -->
+                    </div>
+                    <div id="slot-1" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 2</span> -->
+                    </div>
+                    <div id="slot-2" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 3</span> -->
+                    </div>
+                    <div id="slot-3" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 4</span> -->
+                    </div>
+                    <div id="slot-4" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 5</span> -->
+                    </div>
+                    <div id="slot-5" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 6</span> -->
+                    </div>
+                    <div id="slot-6" class="item-slot empty">
+                        <!-- <span class="slot-number">SLOT 7</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+        <div class="progress-label">Health</div>
+        <div class="progress-cancel-hint">Press X to cancel</div>
+    </div>
+
+    <!-- Kits Menu (hidden by default) -->
+    <div class="kits-overlay" style="display: none;">
+        <div class="kits-modal">
+            <div class="kits-header">
+                <div class="kits-title">Kits</div>
+                <button class="kits-close" id="kits-close-btn" title="Close">✕</button>
+            </div>
+            <div class="kits-grid" id="kits-grid"></div>
+        </div>
+    </div>
+
+    <div class="kill-hud" style="display: none;">
+        <div class="kill-skull">
+            <svg fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="m23.98 5.51118.02.0008.02-.0008c4.0642-.16257 11.9816 1.36761 15.48 8.61382v9.1967c-.1652.2038-.3196.4583-.4585.7235-.184.3512-.3591.757-.5107 1.1685-.2961.8038-.5308 1.7058-.5308 2.2979v.0615l.0149.0597c.2318.927.2322 1.8592.1159 2.6153-.0581.3775-.1439.7023-.2391.9537-.0996.2635-.194.405-.2453.4562-.2458.2458-.9692.9687-1.9297 1.6291-.973.6689-2.1196 1.2245-3.2167 1.2245-.6551 0-1.0682.4704-1.3115.9384-.248.477-.3994 1.0892-.4963 1.6818-.1954 1.1952-.1947 2.4817-.1922 2.8829l.0003.0479.0094.047c.0119.0597.0101.1402-.0811.2553-.1039.1311-.3319.3127-.7969.493-.9311.361-2.6432.6527-5.6163.6537-3.2414-.2001-4.9635-.4895-5.8457-.8078-.4424-.1597-.6008-.3019-.6546-.3766-.0332-.0462-.0495-.0941-.0248-.2176l.0094-.047.0003-.0479c.0025-.4012.0032-1.6877-.1922-2.8829-.0969-.5926-.2483-1.2048-.4963-1.6818-.2433-.468-.6564-.9384-1.3115-.9384-1.0971 0-2.2437-.5556-3.2167-1.2245-.9605-.6604-1.6839-1.3833-1.9297-1.6291-.0513-.0512-.1457-.1927-.2453-.4562-.0952-.2514-.18104-.5762-.23911-.9537-.11632-.7561-.11586-1.6883.11588-2.6153l.01493-.0597v-.0615c0-.5921-.23471-1.4941-.53083-2.2979-.1516-.4115-.32668-.8173-.51063-1.1685-.13894-.2652-.29337-.5197-.45854-.7235v-9.1967c3.4984-7.24621 11.4158-8.77639 15.48-8.61382zm.0018 21.47282c-.0896-.0051-.1991.0117-.3098.0852-.0664.0441-.1137.0961-.1474.1484-.0969.1056-.2008.2484-.2972.3888-.1418.2065-.3101.4723-.4893.7761-.3581.6071-.7691 1.3821-1.1067 2.1625-.3329.77-.6132 1.5877-.6774 2.2669-.0319.3381-.0159.694.1181 1.0032.1459.3366.4188.5846.8066.6815.4717.118.8931.1059 1.2593-.0279.3662-.1337.6336-.3733.8243-.637.0241-.0333.0472-.0672.0691-.1015.015.0189.0304.0376.0461.0561.2.2344.4673.4345.8147.54.3459.105.7367.1059 1.1691-.0022.3834-.0959.6574-.3379.8051-.6718.1357-.3066.1517-.6585.1195-.9908-.0646-.6669-.3463-1.4668-.6795-2.2171-.338-.761-.7496-1.5158-1.1081-2.1062-.1793-.2954-.348-.5539-.4902-.7544-.0973-.1372-.2041-.2794-.3045-.3834-.0337-.0477-.0793-.0946-.1413-.1346-.0995-.064-.1975-.0828-.2805-.0818zm-7.9818 4.0276c1.3967 0 2.8846-.6974 4.0128-1.6932 1.1252-.993 1.9872-2.3684 1.9872-3.8068 0-1.3369-.4058-2.6934-1.1649-3.7278-.7649-1.0423-1.9041-1.7722-3.3351-1.7722-1.4066 0-2.7772.7061-3.7855 1.7144-1.0084 1.0084-1.7145 2.379-1.7145 3.7856 0 1.2993.2635 2.6476.8894 3.6895.6391 1.0637 1.6641 1.8105 3.1106 1.8105zm11-5.5c0 1.4384.862 2.8138 1.9872 3.8068 1.1282.9958 2.6161 1.6932 4.0128 1.6932 1.4465 0 2.4715-.7468 3.1106-1.8105.6259-1.0419.8894-2.3902.8894-3.6895 0-1.4066-.7061-2.7772-1.7145-3.7856-1.0083-1.0083-2.3789-1.7144-3.7855-1.7144-1.431 0-2.5702.7299-3.3351 1.7722-.7591 1.0344-1.1649 2.3909-1.1649 3.7278z"
+                    fill="#F31439" stroke="#F31439" />
+            </svg>
+        </div>
+        <div class="kill-count">0</div>
+    </div>
+
+    <!-- PVP Death Overlay -->
+    <div class="pvp-death-overlay"></div>
+
+    <!-- Killcam Interface (for deathframe) -->
+    <div class="killcam" style="display: none;"></div>
+
+    <div class="host-menu" style="display: none;">
+        <div class="categories">
+            <button class="category-btn active" data-category="invites">
+                <i class="fa-solid fa-envelope"></i>
+                Invites
+            </button>
+            <button class="category-btn" data-category="create">
+                <i class="fa-solid fa-plus"></i>
+                Create
+            </button>
+        </div>
+
+        <div class="content-section invites-section active">
+            <div class="invite-list">
+                <!-- Invites will be dynamically added here -->
+            </div>
+        </div>
+
+        <div class="content-section create-section">
+            <div class="create-options">
+                <div class="option-group">
+                    <div class="option-title">Map</div>
+                    <div class="option-content">
+                        <button class="map-btn">Select Map</button>
+                        <span class="selected-map">No map selected</span>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <div class="option-title">Time</div>
+                    <div class="option-content">
+                        <button class="time-btn" data-time="10">10m</button>
+                        <button class="time-btn" data-time="15">15m</button>
+                        <button class="time-btn" data-time="30">30m</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="host-controls">
+                <button class="host-btn btn-start">
+                    <i class="fa-solid fa-play"></i>
+                    Start
+                </button>
+                <button class="host-btn btn-stop">
+                    <i class="fa-solid fa-stop"></i>
+                    Stop
+                </button>
+                <button class="host-btn btn-invite">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Invite
+                </button>
+            </div>
+
+            <div class="player-list">
+                <!-- Players will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="map-modal" style="display: none;">
+        <div class="option-title">Select Map</div>
+        <div class="map-list">
+            <!-- Maps will be dynamically added here -->
+        </div>
+        <div class="host-controls">
+            <button class="host-btn btn-confirm">Confirm</button>
+            <button class="host-btn btn-cancel">Cancel</button>
+        </div>
+    </div>
+
+
+    <div class="player-status-panel" style="display: none;">
+        <div class="status-wrapper">
+          <div class="vitals-container">
+            <div class="vital-row vitality">
+              <div class="vital-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M12 3v7h7v4h-7v7h-2v-7H3v-4h7V3z"/>
+                </svg>
+              </div>
+              <div class="vital-meter">
+                <div class="meter-background">
+                  <div class="meter-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="vital-row defense">
+              <div class="vital-icon">
+                <div class="icon-wrapper" style="margin-bottom: 0.25vh; display: flex; align-items: center; justify-content: center;">
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="currentColor" d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="vital-meter">
+                <div class="meter-background">
+                  <div class="meter-base">
+                    <div class="segment-line seg-1"></div>
+                    <div class="segment-line seg-2"></div>
+                    <div class="segment-line seg-3"></div>
+                    <div class="meter-fill" style="width: 100%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-leaderboard" style="display: none;">
+        <div class="guild-container">
+            <p class="guild-name">madrazo</p>
+            <p class="kills-count">1 💀</p>
+        </div>
+        <div class="guild-container">
+            <p class="guild-name">F4L</p>
+            <p class="kills-count">2 💀</p>
+        </div>
+        <div class="guild-container">
+            <p class="guild-name">TEST</p>
+            <p class="kills-count">2 💀</p>
+        </div>
+      </div>
+
+      <!-- Effects Container -->
+      <div class="extra-container" style="display: none;">
+        <!-- Antizin Effect -->
+        <div class="effect antizin" style="display: none;">
+          <div class="effect-icon">
+            <i class="fa-solid fa-shield-virus"></i>
+          </div>
+          <div class="effect-info">
+            <div class="effect-name">ANTIZIN</div>
+            <div class="effect-time time">6:00</div>
+          </div>
+          <div class="CircularProgressbar">
+            <svg class="CircularProgressbar-svg" viewBox="0 0 100 100">
+              <path class="CircularProgressbar-trail" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#2c2c2c" strokeWidth="4" fill="none"/>
+              <path class="CircularProgressbar-path" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#00ff88" strokeWidth="4" fill="none" strokeDasharray="289.027" strokeDashoffset="289.027"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Spawn Car Effect -->
+        <div class="effect spawncar" style="display: none;">
+            <div class="spawncar-circle">
+                <div class="spawncar-icon">
+                    <i class="fa-solid fa-car"></i>
+                </div>
+                <svg class="spawncar-progress" viewBox="0 0 100 100">
+                    <circle class="spawncar-trail" cx="50" cy="50" r="45" stroke="#2c2c2c" stroke-width="3.5" fill="none"/>
+                    <circle class="spawncar-path" cx="50" cy="50" r="45" stroke="#ff6b35" stroke-width="3.5" fill="none" stroke-dasharray="283" stroke-dashoffset="283"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Tracker Deluxo Effect -->
+        <div class="effect trackerdeluxo" style="display: none;">
+            <div class="trackerdeluxo-circle">
+                <div class="trackerdeluxo-icon">
+                    <i class="fa-solid fa-radar"></i>
+                </div>
+                <svg class="trackerdeluxo-progress" viewBox="0 0 100 100">
+                    <circle class="trackerdeluxo-trail" cx="50" cy="50" r="45" stroke="#2c2c2c" stroke-width="3.5" fill="none"/>
+                    <circle class="trackerdeluxo-path" cx="50" cy="50" r="45" stroke="#00ff88" stroke-width="3.5" fill="none" stroke-dasharray="283" stroke-dashoffset="283"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Baby God Effect -->
+        <div class="effect babygod" style="display: none;">
+          <div class="effect-icon">
+            <i class="fa-solid fa-baby"></i>
+          </div>
+          <div class="effect-info">
+            <div class="effect-name">BABY GOD</div>
+            <div class="effect-time time">0:02</div>
+          </div>
+          <div class="CircularProgressbar">
+            <svg class="CircularProgressbar-svg" viewBox="0 0 100 100">
+              <path class="CircularProgressbar-trail" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#2c2c2c" strokeWidth="4" fill="none"/>
+              <path class="CircularProgressbar-path" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#ffd700" strokeWidth="4" fill="none" strokeDasharray="289.027" strokeDashoffset="289.027"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Safe Zone Effect -->
+        <div class="effect safezone" style="display: none;">
+          <div class="safezone-circle">
+            <div class="safezone-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <svg class="safezone-progress" viewBox="0 0 100 100">
+              <circle class="safezone-trail" cx="50" cy="50" r="45" stroke="#2c2c2c" stroke-width="4" fill="none"/>
+              <circle class="safezone-path" cx="50" cy="50" r="45" stroke="#ffffff" stroke-width="4" fill="none" stroke-dasharray="283" stroke-dashoffset="283"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Combat Mode Effect -->
+        <div class="effect combatmode" style="display: none;">
+          <div class="combatmode-circle">
+            <div class="combatmode-icon">
+              <i class="fa-solid fa-crosshairs"></i>
+            </div>
+            <svg class="combatmode-progress" viewBox="0 0 100 100">
+              <circle class="combatmode-trail" cx="50" cy="50" r="45" stroke="#2c2c2c" stroke-width="3.5" fill="none"/>
+              <circle class="combatmode-path" cx="50" cy="50" r="45" stroke="#ff4444" stroke-width="3.5" fill="none" stroke-dasharray="283" stroke-dashoffset="283"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Flesh Effect -->
+        <div class="effect flesh" style="display: none;">
+          <div class="effect-icon">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <div class="effect-info">
+            <div class="effect-name">FLESH</div>
+            <div class="effect-time time">3:00</div>
+          </div>
+          <div class="CircularProgressbar">
+            <svg class="CircularProgressbar-svg" viewBox="0 0 100 100">
+              <path class="CircularProgressbar-trail" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#2c2c2c" strokeWidth="4" fill="none"/>
+              <path class="CircularProgressbar-path" d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90" stroke="#ff1493" strokeWidth="4" fill="none" strokeDasharray="289.027" strokeDashoffset="289.027"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>

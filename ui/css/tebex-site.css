@@ -1,0 +1,94 @@
+@font-face {
+    font-family: "Arame";
+    src: url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.eot");
+    src: url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/88b96d4bbbd5526e485ca727c48da139.svg#Arame")format("svg");
+}
+
+.tebex-site-container {
+	align-items: center;
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	min-width: 20em;
+	min-height: 40em;
+	width: 80%;
+	height: 85%;
+
+	margin: auto;
+}
+
+.web-header {
+	overflow:hidden;
+	background-color: #f4f5f6;
+	width: 100%;
+	height: 42;
+	display: flex;
+	align-items: center;
+}
+
+.web-container {
+	background-color: #f4f5f6;
+	border-style: solid;
+	border-color: #e6e7e8;
+	border-width: 1px;
+	border-radius: 0px;
+}
+
+/* lets margin for potential border */
+.web-site {
+	height: 94.5%;
+}
+
+.input-search {
+	position: relative;
+	margin: 0 3px;
+	width: 100%;
+	height: 24px;
+	border-style: solid;
+	border-color: #e6e7e8;
+	border-width: 1px;
+	border-radius: 4px;
+	font-family: "Arame", sans-serif;
+	padding-left: 10px;
+	color: rgba(90, 90, 90, .8);
+}
+
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.browser-button {
+	background-position: center;
+	background-size: cover;
+	width: 16px;
+	height: 16px;
+	margin: 0 8px;
+}
+
+.browser-button:hover {
+	opacity: .5;
+	border-width: 0;
+	outline: none;
+}
+
+
+.back-button {
+	background-image : url("../assets/arrowback.png");
+}
+
+.next-button {
+	background-image : url("../assets/arrownext.png");
+}

@@ -1,0 +1,256 @@
+.host-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(17, 17, 17, 0.95);
+    border-radius: 8px;
+    padding: 20px;
+    width: 800px;
+    max-height: 80vh;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    display: none;
+    overflow: hidden;
+}
+
+.host-menu .categories {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.category-btn {
+    background: rgba(51, 51, 51, 0.8);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.category-btn:hover {
+    background: rgba(71, 71, 71, 0.8);
+}
+
+.category-btn.active {
+    /* background: #F31439; */
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Invites Section */
+.invite-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.invite-item {
+    background: rgba(51, 51, 51, 0.8);
+    padding: 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.invite-player {
+    font-weight: 500;
+}
+
+.invite-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-accept, .btn-decline {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.btn-accept {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-decline {
+    background: #f44336;
+    color: white;
+}
+
+.btn-accept:hover, .btn-decline:hover {
+    opacity: 0.8;
+}
+
+/* Create Section */
+.create-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.option-group {
+    background: rgba(51, 51, 51, 0.8);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.option-title {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.option-content {
+    display: flex;
+    gap: 10px;
+}
+
+.time-btn, .map-btn {
+    padding: 8px 15px;
+    background: rgba(71, 71, 71, 0.8);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.time-btn:hover, .map-btn:hover {
+    background: #F31439;
+}
+
+.time-btn.active {
+    background: #F31439;
+}
+
+/* Map Modal */
+.map-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(17, 17, 17, 0.95);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    display: none;
+}
+
+.map-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.map-item {
+    padding: 10px;
+    background: rgba(51, 51, 51, 0.8);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.map-item:hover {
+    background: rgba(71, 71, 71, 0.8);
+}
+
+.map-item.selected {
+    background: #F31439;
+}
+
+/* Host Controls */
+.host-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.host-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.btn-start {
+    background: #4CAF50;
+}
+
+.btn-stop {
+    background: #f44336;
+}
+
+.btn-invite {
+    background: #2196F3;
+}
+
+.host-btn:hover {
+    opacity: 0.8;
+}
+
+/* Player List */
+.player-list {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.player-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.player-list::-webkit-scrollbar-track {
+    background: rgba(51, 51, 51, 0.4);
+    border-radius: 4px;
+}
+
+.player-list::-webkit-scrollbar-thumb {
+    background: #F31439;
+    border-radius: 4px;
+}
+
+.player-list::-webkit-scrollbar-thumb:hover {
+    background: #ff4612;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(51, 51, 51, 0.8);
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.btn-kick {
+    padding: 5px 15px;
+    background: #f44336;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.btn-kick:hover {
+    opacity: 0.8;
+}

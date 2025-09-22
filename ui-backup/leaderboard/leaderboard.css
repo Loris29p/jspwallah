@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "Purista Medium";
+    src: url("../assets/PuristaMedium.otf");
+  }
+  
+  body {
+    margin: 0;
+    color: white;
+    font-family: "Purista Medium";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #lobby-page {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+  
+  .leaderboard-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    padding: 20px;
+    height: 80vw;
+  }
+  
+  .leaderboard {
+    background-color: #242423;
+    border: 5px solid red;
+    width: 25vw;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    
+  }
+  
+  .leaderboard-header {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 10px;
+    background-color: red;
+    padding: 25px 0;
+    text-transform: uppercase;
+  }
+  
+  .leaderboard-table {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 5px;
+  }
+  
+  .column-header {
+    background-color: #161616;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .column-content {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 5px;
+    overflow-y: hidden;
+    overflow: hidden;
+  }
+  
+  .cell {
+    padding: 1px;
+    text-align: center;
+    background-color: #252525;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+  }
+  
+  #actualisation {
+    color: white;
+    font-weight: 500;
+    position: fixed;
+    width: 20vw;
+    height: 3.5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 89%;
+    right: 44.3%;
+    transform: translate(-50%, -50%);
+  }
