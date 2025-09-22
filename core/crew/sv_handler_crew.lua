@@ -34,10 +34,32 @@ end
 RegisterCallback("callback:crew:getLeaderboard", function(src)
     local CrewDat = GetAllCrew()
     local leaderboardData = {}
-    
+
     -- Convertir les objets crew en tables simples pour le JavaScript
     for crewId, crew in pairs(CrewDat) do
         if crew then
+            -- Essayer de trouver le flag du leader actuel
+            local crewFlag = crew.flag or "GB"
+
+            -- Si possible, récupérer le flag du leader actuel
+            if crew.members and #crew.members > 0 then
+                for _, member in pairs(crew.members) do
+                    if member.rank == "leader" then
+                        -- Si le leader est en ligne, récupérer son flag actuel
+                        local leaderPlayer = GetPlayerUUID(member.uuid)
+                        if leaderPlayer and leaderPlayer.flag then
+                            crewFlag = leaderPlayer.flag
+                            -- Mettre à jour le flag du crew si différent
+                            if crew.flag ~= crewFlag then
+                                crew.flag = crewFlag
+                                crew.need_save = true
+                            end
+                        end
+                        break
+                    end
+                end
+            end
+
             table.insert(leaderboardData, {
                 crewId = crewId,
                 crewName = crew.crewName or "Unknown Crew",
@@ -48,12 +70,12 @@ RegisterCallback("callback:crew:getLeaderboard", function(src)
                 redzoneKills = crew.killsRedzone or 0,
                 redzone_kills = crew.killsRedzone or 0, -- Alternative field name
                 redzone = crew.killsRedzone or 0, -- Alternative field name
-                country = crew.flag or "GB",
-                flag = crew.flag or "GB" -- Alternative field name
+                country = crewFlag,
+                flag = crewFlag -- Alternative field name
             })
         end
     end
-    
+
     print("Leaderboard callback returning " .. #leaderboardData .. " crews")
     return leaderboardData
 end)
@@ -81,10 +103,22 @@ function GetMyCrewInfo(src)
 end
 
 _RegisterServerEvent("PREFIX_PLACEHOLDER:c:LoadMyCrew", function()
-    local intSource = source 
+    local intSource = source
     local CrewDat = GetMyCrewInfo(intSource)
-    if CrewDat then 
-        if OnlineCrewPlayers[CrewDat.crewId] == nil then 
+    if CrewDat then
+        local PLAYER_DATA = GetPlayerId(intSource)
+
+        -- Si c'est le leader qui se connecte, mettre à jour le flag du crew
+        local playerRole = CrewDat:GetMemberRole(PLAYER_DATA.uuid)
+        if playerRole == "leader" and PLAYER_DATA.flag then
+            if CrewDat.flag ~= PLAYER_DATA.flag then
+                CrewDat.flag = PLAYER_DATA.flag
+                CrewDat.need_save = true
+                print("Updated crew flag to leader's flag:", PLAYER_DATA.flag)
+            end
+        end
+
+        if OnlineCrewPlayers[CrewDat.crewId] == nil then
             OnlineCrewPlayers[CrewDat.crewId] = {}
         end
         table.insert(OnlineCrewPlayers[CrewDat.crewId], {
@@ -107,7 +141,7 @@ _RegisterServerEvent("PREFIX_PLACEHOLDER:c:LoadMyCrew", function()
             lastOnline = os.time(),
         })
 
-        for k, v in pairs(OnlineCrewPlayers[CrewDat.crewId]) do 
+        for k, v in pairs(OnlineCrewPlayers[CrewDat.crewId]) do
             _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrewOnline", v.source, OnlineCrewPlayers[CrewDat.crewId])
         end
         _TriggerClientEvent("PREFIX_PLACEHOLDER:c:LoadCrew", intSource, CrewDat)
@@ -374,9 +408,12 @@ function CreateCrew(src, tblData)
 
     local OWNER_DATA = GetPlayerId(src)
 
+    -- Récupérer le flag du leader
+    local leaderFlag = OWNER_DATA.flag or "GB"
+
     local crewId = MySQL.Sync.fetchScalar("SELECT MAX(crewId) FROM crew")
 
-    if not crewId then 
+    if not crewId then
         crewId = 0
     end
 
@@ -394,7 +431,7 @@ function CreateCrew(src, tblData)
         ["@aidropTaken"] = 0,
         ["@cupWin"] = 0,
         ["@description"] = (tblData.crewDesc) or "",
-        ["@flag"] = "GB",
+        ["@flag"] = leaderFlag,
     }, function(result)
         ListCrew[crewId] = ClassCrew:CreateCrewData({
             crewId = crewId,
@@ -407,7 +444,7 @@ function CreateCrew(src, tblData)
             killsRedzone = 0,
             aidropTaken = 0,
             description = (tblData.crewDesc) or "",
-            flag = "GB",
+            flag = leaderFlag,
             cupWin = 0,
         })
         local CrewDat = GetCrewData(crewId)
