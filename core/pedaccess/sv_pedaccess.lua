@@ -176,8 +176,16 @@ end)
 
 _RegisterServerEvent('pedaccess:PutModel', function(model)
     local PLAYER <const> = GetPlayerId(source)
-    if PLAYER then 
-        if (PLAYER.role ~= "vip" and PLAYER.role ~= "vip+" and PLAYER.role ~= "mvp" and PLAYER.role ~= "boss") and PLAYER.data.ped_access.access ~= true then 
+    if PLAYER then
+        local hasPedAccess = PLAYER.data.ped_access and PLAYER.data.ped_access.access == true
+        print(hasPedAccess, "hasPedAccess")
+        print(PLAYER.data.ped_access, "PLAYER.data.ped_access")
+        print(PLAYER.data.ped_access.access, "PLAYER.data.ped_access.access")
+        print(json.encode(PLAYER.data), "PLAYER.data")
+        local hasVipRole = PLAYER.role == "vip" or PLAYER.role == "vip+" or PLAYER.role == "mvp" or PLAYER.role == "boss"
+        print(hasVipRole, "hasVipRole")
+
+        if not hasVipRole and not hasPedAccess then
             return DoNotif(source, "~r~You don't have access to this model")
         end
         PLAYER.skin.model = model
